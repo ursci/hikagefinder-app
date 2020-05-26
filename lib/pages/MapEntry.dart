@@ -80,39 +80,73 @@ class MapEntryState extends State<MapEntry> {
         title: Text("Hikage Route Finder"),
       ),
       body: Center(
-        child: FlutterMap(
-          options: MapOptions(
-              center: _initialPoint,
-              maxZoom: 18.0,
-              minZoom: 17.0,
-              zoom: 18.0,
-              nePanBoundary: LatLng(35.6592979 + 0.005, 139.7005656 + 0.005),
-              swPanBoundary: LatLng(35.6592979 - 0.005, 139.7005656 - 0.005),
-              onPositionChanged: (pos, t) {
-                centerMarker(pos);
-              }),
-          mapController: _mapController,
-          layers: [
-            TileLayerOptions(
-              urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-              subdomains: ['a', 'b', 'c'],
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              flex: 7,
+              child: Stack(
+                children: <Widget>[
+                  FlutterMap(
+                    options: MapOptions(
+                        center: _initialPoint,
+                        maxZoom: 18.0,
+                        minZoom: 17.0,
+                        zoom: 18.0,
+                        nePanBoundary:
+                            LatLng(35.6592979 + 0.005, 139.7005656 + 0.005),
+                        swPanBoundary:
+                            LatLng(35.6592979 - 0.005, 139.7005656 - 0.005),
+                        onPositionChanged: (pos, t) {
+                          centerMarker(pos);
+                        }),
+                    mapController: _mapController,
+                    layers: [
+                      TileLayerOptions(
+                        urlTemplate:
+                            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        subdomains: ['a', 'b', 'c'],
+                      ),
+                      PolylineLayerOptions(
+                        polylines: _polyLines,
+                      ),
+                      MarkerLayerOptions(
+                        markers: _markers,
+                      )
+                    ],
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(0, 0, 20.0, 30.0),
+                      child: FloatingActionButton(
+                          backgroundColor: Colors.deepPurple,
+                          child: Icon(Icons.my_location),
+                          onPressed: () {
+                            _mapController.move(
+                                _initialPoint, _mapController.zoom);
+                          }),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            PolylineLayerOptions(
-              polylines: _polyLines,
+            Expanded(
+              flex: 1,
+              child: Container(
+                padding: EdgeInsets.all(15.0),
+                color: Colors.white,
+                child: RaisedButton(
+                  color: Colors.green,
+                  child: Text(
+                    "Find Route",
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                  onPressed: () => {},
+                ),
+              ),
             ),
-            MarkerLayerOptions(
-              markers: _markers,
-            )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Center Position',
-        backgroundColor: Colors.green[900],
-        onPressed: () {
-          _mapController.move(_initialPoint, _mapController.zoom);
-        },
-        child: Icon(Icons.my_location),
       ),
     );
   }
