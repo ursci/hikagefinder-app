@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:hikageapp/pages/InfoPage.dart';
+import 'package:hikageapp/pages/MapStartPage.dart';
 import 'package:latlong/latlong.dart';
 
-class MapEntry extends StatefulWidget {
+class MainPage extends StatefulWidget {
   @override
-  MapEntryState createState() => MapEntryState();
+  MainPageState createState() => MainPageState();
 }
 
-class MapEntryState extends State<MapEntry> {
+class MainPageState extends State<MainPage> {
   MapController _mapController = MapController();
   List<Marker> _markers = List<Marker>();
   List<Polyline> _polyLines = List<Polyline>();
@@ -27,45 +29,9 @@ class MapEntryState extends State<MapEntry> {
           child: FlatButton(
             onPressed: () => {},
             child: Icon(
-              Icons.location_on,
+              Icons.my_location,
               size: 45.0,
-              color: Colors.green[900],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  void centerMarker(MapPosition pos) {
-    if (_markers != null && _markers.isNotEmpty && _markers.length > 1) {
-      _markers.removeAt(1);
-    }
-
-    if (_polyLines != null && _polyLines.isNotEmpty) {
-      _polyLines.removeAt(0);
-    }
-
-    _polyLines.add(Polyline(
-      color: Colors.grey,
-      points: [pos.center, _initialPoint],
-      strokeWidth: 6.0,
-      isDotted: true,
-    ));
-
-    _markers.add(
-      Marker(
-        point: pos.center,
-        height: 49.0,
-        width: 49.0,
-        anchorPos: AnchorPos.exactly(Anchor(10.0, 10.0)),
-        builder: (ctx) => Container(
-          child: FlatButton(
-            onPressed: () => {},
-            child: Icon(
-              Icons.location_on,
-              size: 45.0,
-              color: Colors.red,
+              color: Colors.blue[900],
             ),
           ),
         ),
@@ -76,9 +42,10 @@ class MapEntryState extends State<MapEntry> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         title: Text("Hikage Route Finder"),
-      ),
+        backgroundColor: Colors.blue[900],
+      ),*/
       body: Center(
         child: Column(
           children: <Widget>[
@@ -90,21 +57,23 @@ class MapEntryState extends State<MapEntry> {
                     options: MapOptions(
                         center: _initialPoint,
                         maxZoom: 18.0,
-                        minZoom: 17.0,
-                        zoom: 18.0,
+                        minZoom: 15.0,
+                        zoom: 15.0,
+                        /*
                         nePanBoundary:
                             LatLng(35.6592979 + 0.005, 139.7005656 + 0.005),
                         swPanBoundary:
                             LatLng(35.6592979 - 0.005, 139.7005656 - 0.005),
-                        onPositionChanged: (pos, t) {
-                          centerMarker(pos);
-                        }),
+                         */
+                        onPositionChanged: (pos, t) {}),
                     mapController: _mapController,
                     layers: [
                       TileLayerOptions(
                         urlTemplate:
-                            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                        subdomains: ['a', 'b', 'c'],
+                            'https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png',
+                        //'http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png',
+                        //'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        //subdomains: ['a', 'b', 'c'],
                       ),
                       PolylineLayerOptions(
                         polylines: _polyLines,
@@ -115,12 +84,36 @@ class MapEntryState extends State<MapEntry> {
                     ],
                   ),
                   Align(
+                    alignment: Alignment.topLeft,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(20, 30, 20.0, 30.0),
+                      child: FloatingActionButton(
+                        heroTag: null,
+                        backgroundColor: Colors.white,
+                        child: Icon(
+                          Icons.info,
+                          color: Colors.blue[900],
+                          size: 38.0,
+                        ),
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => InfoPage()),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Align(
                     alignment: Alignment.bottomRight,
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(0, 0, 20.0, 30.0),
                       child: FloatingActionButton(
-                          backgroundColor: Colors.deepPurple,
-                          child: Icon(Icons.my_location),
+                          heroTag: null,
+                          backgroundColor: Colors.white,
+                          child: Icon(
+                            Icons.my_location,
+                            color: Colors.blue[900],
+                            size: 38.0,
+                          ),
                           onPressed: () {
                             _mapController.move(
                                 _initialPoint, _mapController.zoom);
@@ -133,15 +126,22 @@ class MapEntryState extends State<MapEntry> {
             Expanded(
               flex: 1,
               child: Container(
-                padding: EdgeInsets.all(15.0),
-                color: Colors.white,
-                child: RaisedButton(
-                  color: Colors.green,
-                  child: Text(
-                    "Find Route",
-                    style: TextStyle(fontSize: 16, color: Colors.white),
+                padding: EdgeInsets.only(left: 24.0, right: 24.0),
+                child: Center(
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
+                    color: Colors.blue[900],
+                    child: Text(
+                      "Start",
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MapStartPage())),
                   ),
-                  onPressed: () => {},
                 ),
               ),
             ),
