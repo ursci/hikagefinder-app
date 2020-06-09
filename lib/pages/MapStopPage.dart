@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:hikageapp/pages/RouteResultPage.dart';
 import 'package:latlong/latlong.dart';
 
 class MapStopPage extends StatefulWidget {
@@ -90,8 +91,8 @@ class MapStopPageState extends State<MapStopPage> {
                     options: MapOptions(
                         center: _initialPoint,
                         maxZoom: 18.0,
-                        minZoom: 17.0,
-                        zoom: 18.0,
+                        minZoom: 15.0,
+                        zoom: 16.0,
                         /*
                         nePanBoundary:
                             LatLng(35.6592979 + 0.005, 139.7005656 + 0.005),
@@ -104,9 +105,9 @@ class MapStopPageState extends State<MapStopPage> {
                     layers: [
                       TileLayerOptions(
                         urlTemplate:
-                            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                        subdomains: ['a', 'b', 'c'],
-                        //'https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png',
+                            //'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                            //subdomains: ['a', 'b', 'c'],
+                            'https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png?yyy=1',
                       ),
                       PolylineLayerOptions(
                         polylines: _polyLines,
@@ -181,7 +182,12 @@ class MapStopPageState extends State<MapStopPage> {
                             "Set",
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
-                          onPressed: () => {},
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => RouteResultPage(
+                                    _initialPoint, _mapController.center),
+                              )),
                         ),
                         SizedBox(
                           width: 8.0,

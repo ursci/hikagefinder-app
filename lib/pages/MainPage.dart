@@ -30,7 +30,7 @@ class MainPageState extends State<MainPage> {
             onPressed: () => {},
             child: Icon(
               Icons.my_location,
-              size: 45.0,
+              size: 35.0,
               color: Colors.blue[900],
             ),
           ),

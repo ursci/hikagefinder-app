@@ -16,8 +16,9 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: 'Hikage Route Finder',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.blue,
       ),
       home: SplashPage(),
     );
