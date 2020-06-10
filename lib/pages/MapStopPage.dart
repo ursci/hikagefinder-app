@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:geojson/geojson.dart';
 import 'package:hikageapp/pages/RouteResultPage.dart';
+import 'package:hikageapp/utils/DialogUtil.dart';
+import 'package:hikageapp/utils/RouteUtils.dart';
 import 'package:latlong/latlong.dart';
 
 class MapStopPage extends StatefulWidget {
@@ -69,6 +74,47 @@ class MapStopPageState extends State<MapStopPage> {
             "assets/img/dest_icon.png",
           ),
         ),
+      ),
+    );
+  }
+
+  showErrorMsg() {
+    DialogUtil.showCustomDialog(context, "Error", "No Route Found", "Close",
+        titleColor: Colors.red);
+  }
+
+  findRoute() async {
+    DialogUtil.showOnSendDialog(context, "Looking For the Route");
+
+    Map<String, dynamic> result =
+        await RouteUtils.findRoute(widget.startPos, _mapController.center);
+
+    Navigator.pop(context);
+
+    GeoJson sGeoJson = GeoJson();
+    GeoJson rGeoJson = GeoJson();
+
+    if (result != null) {
+      JsonEncoder jsonEncoder = JsonEncoder();
+
+      await sGeoJson.parse(jsonEncoder.convert(result["shortest"]));
+      await rGeoJson.parse(jsonEncoder.convert(result["recommended"]));
+
+      if (sGeoJson.features.length == 0 && rGeoJson.features.length == 0) {
+        /// No Features
+        showErrorMsg();
+        return;
+      }
+    } else {
+      showErrorMsg();
+      return;
+    }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => RouteResultPage(
+            _initialPoint, _mapController.center, sGeoJson, rGeoJson),
       ),
     );
   }
@@ -182,12 +228,7 @@ class MapStopPageState extends State<MapStopPage> {
                             "Set",
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
-                          onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => RouteResultPage(
-                                    _initialPoint, _mapController.center),
-                              )),
+                          onPressed: () => findRoute(),
                         ),
                         SizedBox(
                           width: 8.0,

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:geojson/geojson.dart';
 import 'package:latlong/latlong.dart';
 
 class RouteResultPage extends StatefulWidget {
   final LatLng startPos;
   final LatLng stopPos;
+  final GeoJson shortest;
+  final GeoJson recommended;
 
-  RouteResultPage(this.startPos, this.stopPos);
+  RouteResultPage(this.startPos, this.stopPos, this.shortest, this.recommended);
 
   @override
   RouteResultPageState createState() => RouteResultPageState();
@@ -17,6 +20,11 @@ class RouteResultPageState extends State<RouteResultPage> {
   List<Marker> _markers = List<Marker>();
   List<Polyline> _polyLines = List<Polyline>();
 
+  GeoJson _recommendedGeoJson;
+  GeoJson _shortestGeoJson;
+  double _recoSunLight;
+  double _shortSunLight;
+
   LatLng _initialPoint = LatLng(35.6592979, 139.7005656);
 
   String _timeChosen = "Now";
@@ -24,6 +32,9 @@ class RouteResultPageState extends State<RouteResultPage> {
   @override
   void initState() {
     super.initState();
+
+    _recommendedGeoJson = widget.recommended;
+    _shortestGeoJson = widget.shortest;
 
     ///
     /// Fitting points into the screen
@@ -67,12 +78,50 @@ class RouteResultPageState extends State<RouteResultPage> {
       ),
     );
 
-    _polyLines.add(Polyline(
-      color: Colors.blue[900],
-      points: [widget.startPos, widget.stopPos],
-      strokeWidth: 6.0,
-      isDotted: false,
-    ));
+    drawRoute(false);
+  }
+
+  drawRoute(bool shortestFirst) {
+    _recoSunLight =
+        _recommendedGeoJson.features[0].properties["sunlight_rate"] * 100;
+    _shortSunLight =
+        _shortestGeoJson.features[0].properties["sunlight_rate"] * 100;
+
+    _polyLines.clear();
+
+    if (shortestFirst) {
+      _polyLines.add(Polyline(
+        color: Colors.blue[900],
+        points: _recommendedGeoJson.lines[0].geoSerie
+            .toLatLng(), //[widget.startPos, widget.stopPos],
+        strokeWidth: 6.0,
+        isDotted: false,
+      ));
+
+      _polyLines.add(Polyline(
+        color: Colors.blue,
+        points: _shortestGeoJson.lines[0].geoSerie
+            .toLatLng(), //[widget.startPos, widget.stopPos],
+        strokeWidth: 6.0,
+        isDotted: false,
+      ));
+    } else {
+      _polyLines.add(Polyline(
+        color: Colors.blue,
+        points: _shortestGeoJson.lines[0].geoSerie
+            .toLatLng(), //[widget.startPos, widget.stopPos],
+        strokeWidth: 6.0,
+        isDotted: false,
+      ));
+
+      _polyLines.add(Polyline(
+        color: Colors.blue[900],
+        points: _recommendedGeoJson.lines[0].geoSerie
+            .toLatLng(), //[widget.startPos, widget.stopPos],
+        strokeWidth: 6.0,
+        isDotted: false,
+      ));
+    }
   }
 
   @override
@@ -188,7 +237,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                             width: 10.0,
                           ),
                           Text(
-                            "30% Sunshine",
+                            "${_recoSunLight.toStringAsFixed(2)}% Sunshine",
                             style: TextStyle(
                               fontFamily: 'Roboto',
                               color: Color(0xff6c6c6c),
@@ -212,7 +261,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                           "Use Recommended Route",
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
-                        onPressed: () => {},
+                        onPressed: () => setState(() => drawRoute(false)),
                       ),
                       SizedBox(
                         height: 5.0,
@@ -239,7 +288,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                             width: 10.0,
                           ),
                           Text(
-                            "30% Sunlight",
+                            "${_shortSunLight.toStringAsFixed(2)}% Sunlight",
                             style: TextStyle(
                               fontFamily: 'Roboto',
                               color: Color(0xff6c6c6c),
@@ -263,7 +312,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                           "Use Fastest Route",
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
-                        onPressed: () => {},
+                        onPressed: () => setState(() => drawRoute(true)),
                       )
                     ],
                   ),
