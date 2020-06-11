@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:hikageapp/pages/RouteResultPage.dart';
 import 'package:hikageapp/utils/DialogUtil.dart';
+import 'package:hikageapp/utils/MapTileUtils.dart';
 import 'package:hikageapp/utils/RouteUtils.dart';
 import 'package:latlong/latlong.dart';
 
@@ -138,12 +139,7 @@ class MapStopPageState extends State<MapStopPage> {
                         }),
                     mapController: _mapController,
                     layers: [
-                      TileLayerOptions(
-                        urlTemplate:
-                            //'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                            //subdomains: ['a', 'b', 'c'],
-                            'https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png?yyy=1',
-                      ),
+                      MapTileUtils.getDefaultTileMap(),
                       PolylineLayerOptions(
                         polylines: _polyLines,
                       ),

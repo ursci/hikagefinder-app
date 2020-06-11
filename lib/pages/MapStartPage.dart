@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/plugin_api.dart';
 import 'package:hikageapp/pages/MapStopPage.dart';
+import 'package:hikageapp/utils/MapTileUtils.dart';
 import 'package:latlong/latlong.dart';
 
 class MapStartPage extends StatefulWidget {
@@ -90,12 +91,7 @@ class MapStartPageState extends State<MapStartPage> {
                         }),
                     mapController: _mapController,
                     layers: [
-                      TileLayerOptions(
-                        urlTemplate:
-                            // 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                            //subdomains: ['a', 'b', 'c'],
-                            'https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png',
-                      ),
+                      MapTileUtils.getDefaultTileMap(),
                       PolylineLayerOptions(
                         polylines: _polyLines,
                       ),
