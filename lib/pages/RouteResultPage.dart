@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geojson/geojson.dart';
+import 'package:hikageapp/utils/DialogUtil.dart';
+import 'package:hikageapp/utils/RouteUtils.dart';
 import 'package:latlong/latlong.dart';
 
 class RouteResultPage extends StatefulWidget {
@@ -124,6 +126,34 @@ class RouteResultPageState extends State<RouteResultPage> {
     }
   }
 
+  findRoute(TimeOfDay timeOfDay) async {
+    RouteUtils routeUtils = RouteUtils();
+
+    DateTime now = DateTime.now();
+    DateTime rNow = DateTime(
+        now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
+
+    DialogUtil.showOnSendDialog(context, "Looking For the Route");
+
+    bool result = await routeUtils.findRoute(widget.startPos, widget.stopPos,
+        dateParam: rNow);
+
+    Navigator.pop(context);
+
+    if (result) {
+      _timeChosen = timeOfDay.format(context);
+      _recommendedGeoJson = routeUtils.recommendedGeoJson;
+      _shortestGeoJson = routeUtils.shortestGeoJson;
+
+      setState(() {
+        drawRoute(false);
+      });
+    } else {
+      DialogUtil.showCustomDialog(context, "Error", "No Route Found", "Close",
+          titleColor: Colors.red);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget flutterMap = FlutterMap(
@@ -168,7 +198,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                   initialTime: TimeOfDay.now(),
                 ).then((timeOfDay) => setState(() {
                       if (timeOfDay != null) {
-                        _timeChosen = timeOfDay.format(context);
+                        findRoute(timeOfDay);
                       }
                     }));
               },
@@ -237,7 +267,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                             width: 10.0,
                           ),
                           Text(
-                            "${_recoSunLight.toStringAsFixed(2)}% Sunshine",
+                            "${_recoSunLight.toStringAsFixed(2)}% Sunlight",
                             style: TextStyle(
                               fontFamily: 'Roboto',
                               color: Color(0xff6c6c6c),
