@@ -197,12 +197,12 @@ class RouteResultPageState extends State<RouteResultPage> {
                 showTimePicker(
                   context: context,
                   initialTime: TimeOfDay.now(),
-                ).then((timeOfDay) => setState(() {
-                      if (timeOfDay != null) {
-                        findRoute(timeOfDay);
-                        fitMap();
-                      }
-                    }));
+                ).then((timeOfDay) async {
+                  if (timeOfDay != null) {
+                    await findRoute(timeOfDay);
+                    fitMap();
+                  }
+                });
               },
               icon: Icon(
                 Icons.search,
