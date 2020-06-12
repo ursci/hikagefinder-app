@@ -43,10 +43,7 @@ class RouteResultPageState extends State<RouteResultPage> {
     /// Fitting points into the screen
     ///
     _mapController.onReady.then((value) {
-      _mapController.fitBounds(
-        LatLngBounds(widget.startPos, widget.stopPos),
-        options: FitBoundsOptions(padding: EdgeInsets.all(36.0)),
-      );
+      fitMap();
     });
 
     if (widget.startPos != null) {
@@ -127,6 +124,13 @@ class RouteResultPageState extends State<RouteResultPage> {
     }
   }
 
+  fitMap() {
+    _mapController.fitBounds(
+      LatLngBounds(widget.startPos, widget.stopPos),
+      options: FitBoundsOptions(padding: EdgeInsets.all(36.0)),
+    );
+  }
+
   findRoute(TimeOfDay timeOfDay) async {
     RouteUtils routeUtils = RouteUtils();
 
@@ -196,6 +200,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                 ).then((timeOfDay) => setState(() {
                       if (timeOfDay != null) {
                         findRoute(timeOfDay);
+                        fitMap();
                       }
                     }));
               },
