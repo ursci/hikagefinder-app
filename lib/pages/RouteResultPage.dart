@@ -191,6 +191,7 @@ class RouteResultPageState extends State<RouteResultPage> {
             color: Color(0xff777777),
           ),
         ),
+        centerTitle: true,
         actions: <Widget>[
           IconButton(
               onPressed: () {
