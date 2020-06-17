@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:hikageapp/pages/RouteResultPage.dart';
 import 'package:hikageapp/utils/DialogUtil.dart';
+import 'package:hikageapp/utils/LocationUtils.dart';
 import 'package:hikageapp/utils/MapTileUtils.dart';
 import 'package:hikageapp/utils/RouteUtils.dart';
 import 'package:latlong/latlong.dart';
+import 'package:location/location.dart';
 
 class MapStopPage extends StatefulWidget {
   final LatLng startPos;
@@ -21,6 +23,7 @@ class MapStopPageState extends State<MapStopPage> {
   List<Polyline> _polyLines = List<Polyline>();
 
   LatLng _initialPoint = LatLng(35.6592979, 139.7005656);
+  LocationUtils _locationUtils = LocationUtils();
 
   @override
   void initState() {
@@ -56,7 +59,7 @@ class MapStopPageState extends State<MapStopPage> {
 
     _polyLines.add(Polyline(
       color: Colors.grey,
-      points: [pos.center, _initialPoint],
+      points: [pos.center, widget.startPos],
       strokeWidth: 6.0,
       isDotted: true,
     ));
@@ -101,12 +104,17 @@ class MapStopPageState extends State<MapStopPage> {
       context,
       MaterialPageRoute(
         builder: (context) => RouteResultPage(
-            _initialPoint,
+            widget.startPos,
             _mapController.center,
             routeUtils.shortestGeoJson,
             routeUtils.recommendedGeoJson),
       ),
     );
+  }
+
+  getPresentPos() async {
+    LocationData ld = await _locationUtils.getPresentPos();
+    _initialPoint = LatLng(ld.latitude, ld.longitude);
   }
 
   @override
@@ -159,7 +167,8 @@ class MapStopPageState extends State<MapStopPage> {
                             color: Colors.blue[900],
                             size: 38.0,
                           ),
-                          onPressed: () {
+                          onPressed: () async {
+                            await getPresentPos();
                             _mapController.move(
                                 _initialPoint, _mapController.zoom);
                           }),

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:hikageapp/pages/InfoPage.dart';
 import 'package:hikageapp/pages/MapStartPage.dart';
+import 'package:hikageapp/utils/LocationUtils.dart';
 import 'package:hikageapp/utils/MapTileUtils.dart';
 import 'package:latlong/latlong.dart';
+import 'package:location/location.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -16,10 +18,25 @@ class MainPageState extends State<MainPage> {
   List<Polyline> _polyLines = List<Polyline>();
 
   LatLng _initialPoint = LatLng(35.6592979, 139.7005656);
+  LocationUtils _locationUtils = LocationUtils();
 
   @override
   void initState() {
     super.initState();
+    getPresentPos();
+    centerMarker();
+  }
+
+  getPresentPos() async {
+    LocationData ld = await _locationUtils.getPresentPos();
+
+    _initialPoint = LatLng(ld.latitude, ld.longitude);
+    centerMarker();
+  }
+
+  centerMarker() {
+    _markers.clear();
+
     _markers.add(
       Marker(
         point: _initialPoint,
@@ -109,7 +126,8 @@ class MainPageState extends State<MainPage> {
                             color: Colors.blue[900],
                             size: 38.0,
                           ),
-                          onPressed: () {
+                          onPressed: () async {
+                            await getPresentPos();
                             _mapController.move(
                                 _initialPoint, _mapController.zoom);
                           }),
