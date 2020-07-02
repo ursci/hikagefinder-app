@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geojson/geojson.dart';
 import 'package:hikageapp/utils/DialogUtil.dart';
+import 'package:hikageapp/utils/LocationUtils.dart';
 import 'package:hikageapp/utils/MapTileUtils.dart';
 import 'package:hikageapp/utils/RouteUtils.dart';
 import 'package:latlong/latlong.dart';
+import 'package:location/location.dart';
 
 class RouteResultPage extends StatefulWidget {
   final LatLng startPos;
@@ -32,9 +36,24 @@ class RouteResultPageState extends State<RouteResultPage> {
 
   String _timeChosen = "Now";
 
+  LocationUtils _locationUtils = LocationUtils();
+  StreamSubscription<LocationData> _streamSubscription;
+
   @override
   void initState() {
     super.initState();
+
+    ///
+    /// Starting GPS Location Stream
+    ///
+    _locationUtils.changeSettings(LocationAccuracy.high,
+        distanceInterval: 50.0);
+    _streamSubscription = _locationUtils.getLocationStream().listen((data) {
+      debugPrint("GPS: ${data.toString()}");
+      setState(() {
+        drawGpsPos(LatLng(data.latitude, data.longitude));
+      });
+    });
 
     _recommendedGeoJson = widget.recommended;
     _shortestGeoJson = widget.shortest;
@@ -79,6 +98,31 @@ class RouteResultPageState extends State<RouteResultPage> {
     );
 
     drawRoute(false);
+  }
+
+  drawGpsPos(LatLng pos) {
+    if (_markers.length > 2) {
+      _markers.removeAt(2);
+    }
+
+    _markers.add(
+      Marker(
+        point: pos,
+        height: 49.0,
+        width: 49.0,
+        anchorPos: AnchorPos.exactly(Anchor(10.0, 10.0)),
+        builder: (ctx) => Container(
+          child: FlatButton(
+            onPressed: () => {},
+            child: Icon(
+              Icons.my_location,
+              size: 35.0,
+              color: Colors.blue[900],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   drawRoute(bool shortestFirst) {
@@ -159,6 +203,11 @@ class RouteResultPageState extends State<RouteResultPage> {
     }
   }
 
+  getPresentPos() async {
+    LocationData ld = await _locationUtils.getPresentPos();
+    _initialPoint = LatLng(ld.latitude, ld.longitude);
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget flutterMap = FlutterMap(
@@ -231,7 +280,9 @@ class RouteResultPageState extends State<RouteResultPage> {
                             color: Colors.blue[900],
                             size: 38.0,
                           ),
-                          onPressed: () {
+                          onPressed: () async {
+                            await getPresentPos();
+                            drawGpsPos(_initialPoint);
                             _mapController.move(
                                 _initialPoint, _mapController.zoom);
                           }),
@@ -360,6 +411,9 @@ class RouteResultPageState extends State<RouteResultPage> {
 
   @override
   void dispose() {
+    if (_streamSubscription != null) {
+      _streamSubscription.cancel();
+    }
     super.dispose();
   }
 }

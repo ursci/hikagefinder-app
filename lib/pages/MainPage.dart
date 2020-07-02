@@ -23,13 +23,11 @@ class MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-    getPresentPos();
     centerMarker();
   }
 
   getPresentPos() async {
     LocationData ld = await _locationUtils.getPresentPos();
-
     _initialPoint = LatLng(ld.latitude, ld.longitude);
     centerMarker();
   }
