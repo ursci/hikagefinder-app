@@ -1,8 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geojson/geojson.dart';
+import 'package:hikageapp/pages/SelectedRoutePage.dart';
 import 'package:hikageapp/utils/DialogUtil.dart';
 import 'package:hikageapp/utils/LocationUtils.dart';
 import 'package:hikageapp/utils/MapTileUtils.dart';
@@ -37,23 +36,10 @@ class RouteResultPageState extends State<RouteResultPage> {
   String _timeChosen = "Now";
 
   LocationUtils _locationUtils = LocationUtils();
-  StreamSubscription<LocationData> _streamSubscription;
 
   @override
   void initState() {
     super.initState();
-
-    ///
-    /// Starting GPS Location Stream
-    ///
-    _locationUtils.changeSettings(LocationAccuracy.high,
-        distanceInterval: 50.0);
-    _streamSubscription = _locationUtils.getLocationStream().listen((data) {
-      debugPrint("GPS: ${data.toString()}");
-      setState(() {
-        drawGpsPos(LatLng(data.latitude, data.longitude));
-      });
-    });
 
     _recommendedGeoJson = widget.recommended;
     _shortestGeoJson = widget.shortest;
@@ -210,6 +196,12 @@ class RouteResultPageState extends State<RouteResultPage> {
 
   @override
   Widget build(BuildContext context) {
+    List<Polyline> fastestRoute = List<Polyline>();
+    List<Polyline> recommendedRoute = List<Polyline>();
+
+    fastestRoute.add(_polyLines[0]);
+    recommendedRoute.add(_polyLines[1]);
+
     Widget flutterMap = FlutterMap(
       options: MapOptions(
         center: _initialPoint,
@@ -345,7 +337,17 @@ class RouteResultPageState extends State<RouteResultPage> {
                           "Use Recommended Route",
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
-                        onPressed: () => setState(() => drawRoute(false)),
+                        //onPressed: () => setState(() => drawRoute(false)),
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SelectedRoutePage(
+                              recommendedRoute,
+                              _markers,
+                              "Recommended",
+                            ),
+                          ),
+                        ),
                       ),
                       SizedBox(
                         height: 5.0,
@@ -396,7 +398,17 @@ class RouteResultPageState extends State<RouteResultPage> {
                           "Use Fastest Route",
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
-                        onPressed: () => setState(() => drawRoute(true)),
+                        //onPressed: () => setState(() => drawRoute(true)),
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SelectedRoutePage(
+                              fastestRoute,
+                              _markers,
+                              "Fastest",
+                            ),
+                          ),
+                        ),
                       )
                     ],
                   ),
@@ -411,9 +423,6 @@ class RouteResultPageState extends State<RouteResultPage> {
 
   @override
   void dispose() {
-    if (_streamSubscription != null) {
-      _streamSubscription.cancel();
-    }
     super.dispose();
   }
 }
