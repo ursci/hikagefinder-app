@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:hikageapp/res/StringsParams.dart';
 import 'package:hikageapp/utils/LocationUtils.dart';
 import 'package:hikageapp/utils/MapTileUtils.dart';
 import 'package:latlong/latlong.dart';
@@ -123,7 +124,7 @@ class SelectedRoutePageState extends State<SelectedRoutePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _routeText + " Route",
+          _routeText + " ${StringParams.locale["SelectedRoutePage.route"]}",
           style: TextStyle(
             color: Color(0xff777777),
           ),
@@ -177,7 +178,7 @@ class SelectedRoutePageState extends State<SelectedRoutePage> {
                     ),
                     color: Colors.blue[900],
                     child: Text(
-                      "Return",
+                      StringParams.locale["SelectedRoutePage.return"],
                       style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                     onPressed: () => Navigator.pop(context),

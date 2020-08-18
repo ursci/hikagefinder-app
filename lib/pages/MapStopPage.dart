@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:hikageapp/pages/RouteResultPage.dart';
+import 'package:hikageapp/res/StringsParams.dart';
 import 'package:hikageapp/utils/DialogUtil.dart';
 import 'package:hikageapp/utils/LocationUtils.dart';
 import 'package:hikageapp/utils/MapTileUtils.dart';
@@ -80,12 +81,17 @@ class MapStopPageState extends State<MapStopPage> {
   }
 
   showErrorMsg() {
-    DialogUtil.showCustomDialog(context, "Error", "No Route Found", "Close",
+    DialogUtil.showCustomDialog(
+        context,
+        StringParams.locale["MapStopPage.errorDlgTitle"],
+        StringParams.locale["MapStopPage.errorDlgMsg"],
+        StringParams.locale["MapStopPage.errorDlgClose"],
         titleColor: Colors.red);
   }
 
   findRoute() async {
-    DialogUtil.showOnSendDialog(context, "Looking For the Route");
+    DialogUtil.showOnSendDialog(
+        context, StringParams.locale["MapStopPage.findRoute"]);
 
     RouteUtils routeUtils = RouteUtils();
 
@@ -185,7 +191,7 @@ class MapStopPageState extends State<MapStopPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      "Pick your destination",
+                      StringParams.locale["MapStopPage.title"],
                       textAlign: TextAlign.start,
                       style: TextStyle(
                         fontFamily: 'Roboto',
@@ -197,7 +203,7 @@ class MapStopPageState extends State<MapStopPage> {
                       ),
                     ),
                     Text(
-                      "Move the map and drop the pin at the location where you want to start your route.",
+                      StringParams.locale["MapStopPage.message"],
                       style: TextStyle(
                         fontFamily: 'Roboto',
                         color: Color(0xff6c6c6c),
@@ -219,7 +225,7 @@ class MapStopPageState extends State<MapStopPage> {
                           ),
                           color: Colors.blue[900],
                           child: Text(
-                            "Set",
+                            StringParams.locale["MapStopPage.set"],
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                           onPressed: () => findRoute(),
@@ -234,7 +240,7 @@ class MapStopPageState extends State<MapStopPage> {
                             borderRadius: BorderRadius.circular(18.0),
                           ),
                           child: Text(
-                            "Cancel",
+                            StringParams.locale["MapStopPage.cancel"],
                             style: TextStyle(
                                 fontSize: 16, color: Colors.blue[900]),
                           ),

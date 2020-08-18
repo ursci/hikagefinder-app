@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/plugin_api.dart';
 import 'package:hikageapp/pages/MapStopPage.dart';
+import 'package:hikageapp/res/StringsParams.dart';
 import 'package:hikageapp/utils/LocationUtils.dart';
 import 'package:hikageapp/utils/MapTileUtils.dart';
 import 'package:latlong/latlong.dart';
@@ -138,7 +139,7 @@ class MapStartPageState extends State<MapStartPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      "Pick your origin",
+                      StringParams.locale["MapStartPage.title"],
                       textAlign: TextAlign.start,
                       style: TextStyle(
                         fontFamily: 'Roboto',
@@ -150,7 +151,7 @@ class MapStartPageState extends State<MapStartPage> {
                       ),
                     ),
                     Text(
-                      "Move the map and drop the pin at the location where you want to start your route.",
+                      StringParams.locale["MapStartPage.message"],
                       style: TextStyle(
                         fontFamily: 'Roboto',
                         color: Color(0xff6c6c6c),
@@ -172,7 +173,7 @@ class MapStartPageState extends State<MapStartPage> {
                           ),
                           color: Colors.blue[900],
                           child: Text(
-                            "Set",
+                            StringParams.locale["MapStartPage.set"],
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                           onPressed: () => Navigator.push(
@@ -194,7 +195,7 @@ class MapStartPageState extends State<MapStartPage> {
                             borderRadius: BorderRadius.circular(18.0),
                           ),
                           child: Text(
-                            "Cancel",
+                            StringParams.locale["MapStartPage.cancel"],
                             style: TextStyle(
                                 fontSize: 16, color: Colors.blue[900]),
                           ),

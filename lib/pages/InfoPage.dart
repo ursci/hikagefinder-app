@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hikageapp/res/StringsParams.dart';
 
 class InfoPage extends StatelessWidget {
   @override
@@ -10,7 +11,7 @@ class InfoPage extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
         title: Text(
-          "Info",
+          StringParams.locale["ImfoPage.appbar_title"],
           style: TextStyle(
             fontFamily: 'Roboto',
             color: Color(0xff777777),
@@ -43,7 +44,7 @@ class InfoPage extends StatelessWidget {
                   height: 20.0,
                 ),
                 Text(
-                  "What is Hikage Finder?",
+                  StringParams.locale["InfoPage.title"],
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     color: Color(0xff000000),
@@ -57,7 +58,7 @@ class InfoPage extends StatelessWidget {
                   height: 10.0,
                 ),
                 Text(
-                  "Hikage finder let’s you find a route between two locations that has a lower amount of sunshine exposure than the fastest way which is usually suggested by other map services. \n\nTo select your departure and destination point, move the map with one finger and release your finger when the pointer hovers over your desired location.",
+                  StringParams.locale["InfoPage.text"],
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     color: Color(0xff777777),
@@ -74,8 +75,7 @@ class InfoPage extends StatelessWidget {
                   text: new TextSpan(
                     children: [
                       new TextSpan(
-                          text:
-                              "Hikage Finder is developed by the University of Tokyo in corporation with Georepublic Japan.\n\nFor questions and feedback feel free to contact us at",
+                          text: StringParams.locale["InfoPage.text2"],
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             color: Color(0xff989998),
@@ -85,7 +85,7 @@ class InfoPage extends StatelessWidget {
                             letterSpacing: 0.1625,
                           )),
                       new TextSpan(
-                        text: "  contact@hikagefinder.jp",
+                        text: StringParams.locale["InfoPage.contact"],
                         style: TextStyle(
                           fontFamily: 'Roboto',
                           color: Color(0xff23289d),

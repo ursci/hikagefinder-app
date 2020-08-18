@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:hikageapp/pages/InfoPage.dart';
 import 'package:hikageapp/pages/MapStartPage.dart';
+import 'package:hikageapp/res/StringsParams.dart';
 import 'package:hikageapp/utils/LocationUtils.dart';
 import 'package:hikageapp/utils/MapTileUtils.dart';
 import 'package:latlong/latlong.dart';
@@ -145,7 +146,7 @@ class MainPageState extends State<MainPage> {
                     ),
                     color: Colors.blue[900],
                     child: Text(
-                      "Start",
+                      StringParams.locale["MainPage.start"],
                       style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                     onPressed: () => Navigator.push(

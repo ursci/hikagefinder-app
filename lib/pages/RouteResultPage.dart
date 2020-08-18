@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geojson/geojson.dart';
 import 'package:hikageapp/pages/SelectedRoutePage.dart';
+import 'package:hikageapp/res/StringsParams.dart';
 import 'package:hikageapp/utils/DialogUtil.dart';
 import 'package:hikageapp/utils/LocationUtils.dart';
 import 'package:hikageapp/utils/MapTileUtils.dart';
@@ -33,7 +34,7 @@ class RouteResultPageState extends State<RouteResultPage> {
 
   LatLng _initialPoint = LatLng(35.6592979, 139.7005656);
 
-  String _timeChosen = "Now";
+  String _timeChosen = StringParams.locale["RouteResultPage.now"];
 
   LocationUtils _locationUtils = LocationUtils();
 
@@ -168,7 +169,8 @@ class RouteResultPageState extends State<RouteResultPage> {
     DateTime rNow = DateTime(
         now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
 
-    DialogUtil.showOnSendDialog(context, "Looking For the Route");
+    DialogUtil.showOnSendDialog(
+        context, StringParams.locale["RouteResultPage.findRoute"]);
 
     bool result = await routeUtils.findRoute(widget.startPos, widget.stopPos,
         dateParam: rNow);
@@ -184,7 +186,11 @@ class RouteResultPageState extends State<RouteResultPage> {
         drawRoute(false);
       });
     } else {
-      DialogUtil.showCustomDialog(context, "Error", "No Route Found", "Close",
+      DialogUtil.showCustomDialog(
+          context,
+          StringParams.locale["RouteResultPage.errorDlgTitle"],
+          StringParams.locale["RouteResultPage.errorDlgMsg"],
+          StringParams.locale["RouteResultPage.errorDlgClose"],
           titleColor: Colors.red);
     }
   }
@@ -227,7 +233,7 @@ class RouteResultPageState extends State<RouteResultPage> {
           color: Color(0xff777777),
         ),
         title: Text(
-          "Departure: $_timeChosen",
+          "${StringParams.locale["RouteResultPage.departure"]}: $_timeChosen",
           style: TextStyle(
             color: Color(0xff777777),
           ),
@@ -292,7 +298,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "RECOMMENDED",
+                        StringParams.locale["RouteResultPage.recommended"],
                         style: TextStyle(
                           fontFamily: 'Roboto',
                           color: Colors.blue[900],
@@ -313,7 +319,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                             width: 10.0,
                           ),
                           Text(
-                            "${_recoSunLight.toStringAsFixed(2)}% Sunlight",
+                            "${_recoSunLight.toStringAsFixed(2)}% ${StringParams.locale["RouteResultPage.sunlight"]}",
                             style: TextStyle(
                               fontFamily: 'Roboto',
                               color: Color(0xff6c6c6c),
@@ -334,7 +340,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                         ),
                         color: Colors.blue[900],
                         child: Text(
-                          "Use Recommended Route",
+                          StringParams.locale["RouteResultPage.useRecommended"],
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                         //onPressed: () => setState(() => drawRoute(false)),
@@ -344,7 +350,8 @@ class RouteResultPageState extends State<RouteResultPage> {
                             builder: (context) => SelectedRoutePage(
                               recommendedRoute,
                               _markers,
-                              "Recommended",
+                              StringParams
+                                  .locale["RouteResultPage.recommended"],
                             ),
                           ),
                         ),
@@ -353,7 +360,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                         height: 5.0,
                       ),
                       Text(
-                        "FASTEST",
+                        StringParams.locale["RouteResultPage.fastest"],
                         style: TextStyle(
                           fontFamily: 'Roboto',
                           color: Colors.blue,
@@ -374,7 +381,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                             width: 10.0,
                           ),
                           Text(
-                            "${_shortSunLight.toStringAsFixed(2)}% Sunlight",
+                            "${_shortSunLight.toStringAsFixed(2)}% ${StringParams.locale["RouteResultPage.sunlight"]}",
                             style: TextStyle(
                               fontFamily: 'Roboto',
                               color: Color(0xff6c6c6c),
@@ -395,7 +402,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                         ),
                         color: Colors.blue,
                         child: Text(
-                          "Use Fastest Route",
+                          StringParams.locale["RouteResultPage.useFastest"],
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                         //onPressed: () => setState(() => drawRoute(true)),
@@ -405,7 +412,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                             builder: (context) => SelectedRoutePage(
                               fastestRoute,
                               _markers,
-                              "Fastest",
+                              StringParams.locale["RouteResultPage.fastest"],
                             ),
                           ),
                         ),
