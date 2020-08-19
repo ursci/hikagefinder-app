@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:hikageapp/res/GPSParams.dart';
 import 'package:hikageapp/res/StringsParams.dart';
 import 'package:hikageapp/utils/LocationUtils.dart';
 import 'package:hikageapp/utils/MapTileUtils.dart';
@@ -42,17 +43,18 @@ class SelectedRoutePageState extends State<SelectedRoutePage> {
     ///
     /// Starting GPS Location Stream
     ///
-    /*
-    _locationUtils.changeSettings(LocationAccuracy.high,
-        distanceInterval: GPSParams.distanceInterval);
 
-    _streamSubscription = _locationUtils.getLocationStream().listen((data) {
-      _initialPoint = LatLng(data.latitude, data.longitude);
-      debugPrint("GPS: ${data.toString()}");
-      drawGpsPos(_initialPoint);
-      _mapController.move(_initialPoint, _mapController.zoom);
-    });
-    */
+    if (GPSParams.distanceInterval > 0.0) {
+      _locationUtils.changeSettings(LocationAccuracy.high,
+          distanceInterval: GPSParams.distanceInterval);
+
+      _streamSubscription = _locationUtils.getLocationStream().listen((data) {
+        _initialPoint = LatLng(data.latitude, data.longitude);
+        debugPrint("GPS: ${data.toString()}");
+        drawGpsPos(_initialPoint);
+        _mapController.move(_initialPoint, _mapController.zoom);
+      });
+    }
 
     _mapController.onReady.then((val) {
       _mapController.fitBounds(
