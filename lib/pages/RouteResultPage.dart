@@ -97,7 +97,7 @@ class RouteResultPageState extends State<RouteResultPage> {
         point: pos,
         height: 49.0,
         width: 49.0,
-        anchorPos: AnchorPos.exactly(Anchor(10.0, 10.0)),
+        anchorPos: AnchorPos.exactly(Anchor(18.0, 18.0)),
         builder: (ctx) => Container(
           child: FlatButton(
             onPressed: () => {},
