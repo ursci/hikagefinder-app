@@ -221,7 +221,7 @@ class RouteResultPageState extends State<RouteResultPage> {
     Widget flutterMap = FlutterMap(
       options: MapOptions(
         center: _initialPoint,
-        maxZoom: 18.0,
+        maxZoom: 16.0,
         minZoom: 14.0,
         zoom: 18.0,
       ),
@@ -263,7 +263,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                 });
               },
               icon: Icon(
-                Icons.search,
+                Icons.timer,
                 color: Colors.black, //Color(0xff777777),
               ))
         ],
@@ -302,11 +302,14 @@ class RouteResultPageState extends State<RouteResultPage> {
             Expanded(
               flex: 2,
               child: Container(
-                padding: EdgeInsets.only(left: 24.0, right: 24.0),
+                padding: EdgeInsets.all(10.0),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      SizedBox(
+                        height: 5.0,
+                      ),
                       Text(
                         StringParams.locale["RouteResultPage.recommended"],
                         style: TextStyle(
@@ -367,7 +370,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                         ),
                       ),
                       SizedBox(
-                        height: 5.0,
+                        height: 15.0,
                       ),
                       Text(
                         StringParams.locale["RouteResultPage.fastest"],
@@ -426,6 +429,9 @@ class RouteResultPageState extends State<RouteResultPage> {
                             ),
                           ),
                         ),
+                      ),
+                      SizedBox(
+                        height: 5.0,
                       )
                     ],
                   ),
