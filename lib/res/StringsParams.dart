@@ -11,35 +11,34 @@ class StringParams {
     /// InfoPage
     ///
     "ImfoPage.appbar_title": "Info",
-    "InfoPage.title": "Qu'est-ce que Hikage Finder?",
-    "InfoPage.text": "Hikage Finder vous permet de trouver un itinéraire "
-        "entre deux endroits où l'exposition au soleil est moins élevée que "
-        "le moyen le plus rapide qui est généralement suggéré par d'autres "
-        "services de carte.",
-    "InfoPage.text2": "Hikage Finder est développé par l'Université de Tokyo "
-        "en société avec Georepublic Japan.\n\n"
-        "Pour des questions et des commentaires, n'hésitez pas à nous contacter",
+    "InfoPage.title": "À propos de Hikage Finder",
+    "InfoPage.text": "Hikage Finder vous montre l'itinéraire optimum"
+        "entre deux endroits, celui qui a la moindre exposition au soleil tout en étant"
+        "proche du plus court itinéraire possible.",
+    "InfoPage.text2": "Hikage Finder est un service développé par l'Université de Tokyo "
+        "en collaboration avec Georepublic Japan.\n\n"
+        "POur toutes questions ou commentaires, n'hésitez pas à nous contacter",
     "InfoPage.contact": "  contact@hikagefinder.jp",
 
     ///
     /// MapStartPage
     ///
-    "MapStartPage.title": "Choisissez votre origine",
+    "MapStartPage.title": "Sélectionnez votre origine",
     "MapStartPage.message":
         "Déplacez la carte et déposez l'épingle à l'endroit où vous "
-            "souhaitez commencer votre itinéraire.",
-    "MapStartPage.set": "Ensemble",
+            "souhaitez démarrer votre itinéraire.",
+    "MapStartPage.set": "Sélectionner",
     "MapStartPage.cancel": "Annuler",
 
     ///
     /// MapStopPage
     ///
-    "MapStopPage.title": "Choisissez votre destination",
+    "MapStopPage.title": "Sélectionnez votre destination",
     "MapStopPage.message": "Déplacez la carte et déposez l'épingle à l'endroit "
         "où vous souhaitez terminer votre itinéraire.",
-    "MapStopPage.set": "Ensemble",
+    "MapStopPage.set": "Sélectionner",
     "MapStopPage.cancel": "Annuler",
-    "MapStopPage.findRoute": "À la recherche de l'itinéraire",
+    "MapStopPage.findRoute": "Rechercher l'itinéraire",
     "MapStopPage.errorDlgTitle": "Erreur",
     "MapStopPage.errorDlgMsg": "Aucun itinéraire trouvé",
     "MapStopPage.errorDlgClose": "Fermer",
@@ -47,14 +46,14 @@ class StringParams {
     ///
     /// RouteResultPage
     ///
-    "RouteResultPage.now": "Maintenant",
-    "RouteResultPage.recommended": "CONSEILLÉ",
-    "RouteResultPage.sunlight": "Lumière du soleil",
+    "RouteResultPage.now": "Partir maintenant",
+    "RouteResultPage.recommended": "RECOMMANDÉ",
+    "RouteResultPage.sunlight": "Exposition au soleil",
     "RouteResultPage.useRecommended": "Utiliser l'itinéraire recommandé",
     "RouteResultPage.fastest": "LE PLUS RAPIDE",
     "RouteResultPage.useFastest": "Utiliser l'itinéraire le plus rapide",
     "RouteResultPage.departure": "Départ",
-    "RouteResultPage.findRoute": "À la recherche de l'itinéraire",
+    "RouteResultPage.findRoute": "Rechercher l'itinéraire",
     "RouteResultPage.errorDlgTitle": "Erreur",
     "RouteResultPage.errorDlgMsg": "Aucun itinéraire trouvé",
     "RouteResultPage.errorDlgClose": "Fermer",
@@ -63,7 +62,7 @@ class StringParams {
     /// SelectedRoutePage
     ///
     "SelectedRoutePage.route": "Route",
-    "SelectedRoutePage.return": "Revenir",
+    "SelectedRoutePage.return": "Retour",
   };
 
   static final Map<String, String> en = {
