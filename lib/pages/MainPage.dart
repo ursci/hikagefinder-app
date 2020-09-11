@@ -98,7 +98,7 @@ class MainPageState extends State<MainPage> {
                   Align(
                     alignment: Alignment.topLeft,
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(20.0, 50.0, 0, 0),
+                      padding: EdgeInsets.fromLTRB(20, 30, 20.0, 30.0),
                       child: FloatingActionButton(
                         heroTag: null,
                         backgroundColor: Colors.white,
