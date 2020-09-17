@@ -1,6 +1,68 @@
 class StringParams {
   static final Map<String, String> jp = {};
 
+  static final Map<String, String> de = {
+    ///
+    /// MainPage
+    ///
+    "MainPage.start": "Start",
+
+    ///
+    /// InfoPage
+    ///
+    "ImfoPage.appbar_title": "Info",
+    "InfoPage.title": "Über Hikage Finder",
+    "InfoPage.text":
+        "Hikage Finder zeigt Ihnen den optimalen Weg zwischen zwei Orten, denjenigen mit der geringsten Sonneneinstrahlung und gleichzeitig nahe am kürzest möglichen Weg.",
+    "InfoPage.text2":
+        "Hikage Finder ist ein Dienst, der von der Universität Tokio in Zusammenarbeit mit der Georepublik Japan entwickelt wurde.\n\n"
+            "Wenn Sie Fragen oder Anmerkungen haben, zögern Sie bitte nicht, uns zu kontaktieren.",
+    "InfoPage.contact": "  contact@hikagefinder.jp",
+
+    ///
+    /// MapStartPage
+    ///
+    "MapStartPage.title": "Wählen Sie Ihre Herkunft",
+    "MapStartPage.message":
+        "Verschieben Sie die Karte und platzieren Sie die Nadel dort, wo Sie Ihre Route beginnen möchten.",
+    "MapStartPage.set": "Wählen Sie",
+    "MapStartPage.cancel": "Abbrechen",
+
+    ///
+    /// MapStopPage
+    ///
+    "MapStopPage.title": "Wählen Sie Ihr Reiseziel",
+    "MapStopPage.message":
+        "Verschieben Sie die Karte und platzieren Sie die Stecknadel an der Stelle, an der Sie Ihre Route beenden möchten.",
+    "MapStopPage.set": "Wählen Sie",
+    "MapStopPage.cancel": "Abbrechen",
+    "MapStopPage.findRoute": "Finden Sie die Route",
+    "MapStopPage.errorDlgTitle": "Fehler",
+    "MapStopPage.errorDlgMsg": "Keine Reiseroute gefunden",
+    "MapStopPage.errorDlgClose": "schließen",
+
+    ///
+    /// RouteResultPage
+    ///
+    "RouteResultPage.now": "Gehen Sie jetzt",
+    "RouteResultPage.recommended": "EMPFOHLEN",
+    "RouteResultPage.sunlight": "Sonnenlicht",
+    "RouteResultPage.useRecommended": "Verwenden Sie die empfohlene Route",
+    "RouteResultPage.fastest": "SCHNELLSTE",
+    "RouteResultPage.useFastest": "Verwenden Sie die schnellste Route",
+    "RouteResultPage.departure": "Abreise",
+    "RouteResultPage.findRoute": "Finden Sie die Route",
+    "RouteResultPage.errorDlgTitle": "Fehler",
+    "RouteResultPage.errorDlgMsg": "Keine Reiseroute gefunden",
+    "RouteResultPage.errorDlgClose": "schließen",
+
+    ///
+    /// SelectedRoutePage
+    ///
+    "SelectedRoutePage.route": "Route",
+    "SelectedRoutePage.return": "Zurück",
+  };
+
   static final Map<String, String> fr = {
     ///
     /// MainPage
@@ -15,9 +77,10 @@ class StringParams {
     "InfoPage.text": "Hikage Finder vous montre l'itinéraire optimum"
         "entre deux endroits, celui qui a la moindre exposition au soleil tout en étant"
         "proche du plus court itinéraire possible.",
-    "InfoPage.text2": "Hikage Finder est un service développé par l'Université de Tokyo "
-        "en collaboration avec Georepublic Japan.\n\n"
-        "POur toutes questions ou commentaires, n'hésitez pas à nous contacter",
+    "InfoPage.text2":
+        "Hikage Finder est un service développé par l'Université de Tokyo "
+            "en collaboration avec Georepublic Japan.\n\n"
+            "POur toutes questions ou commentaires, n'hésitez pas à nous contacter",
     "InfoPage.contact": "  contact@hikagefinder.jp",
 
     ///
@@ -128,5 +191,5 @@ class StringParams {
     "SelectedRoutePage.return": "Return",
   };
 
-  static final Map<String, String> locale = fr;
+  static final Map<String, String> locale = de;
 }
