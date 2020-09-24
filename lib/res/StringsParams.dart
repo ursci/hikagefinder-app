@@ -10,51 +10,51 @@ class StringParams {
     ///
     /// InfoPage
     ///
-    "ImfoPage.appbar_title": "Info",
-    "InfoPage.title": "Über Hikage Finder",
+    "ImfoPage.appbar_title": "Infos",
+    "InfoPage.title": "Was ist der Hikage-Finder?",
     "InfoPage.text":
-        "Hikage Finder zeigt Ihnen den optimalen Weg zwischen zwei Orten, denjenigen mit der geringsten Sonneneinstrahlung und gleichzeitig nahe am kürzest möglichen Weg.",
+        "Mit dem Hikage Finder können Sie eine Route zwischen zwei Standorten berechnen lassen, die eine niedrigere Sonneneinstrahlung aufweist als der kürzeste Weg, der normalerweise von anderen Kartendiensten vorgeschlagen wird.",
     "InfoPage.text2":
-        "Hikage Finder ist ein Dienst, der von der Universität Tokio in Zusammenarbeit mit der Georepublik Japan entwickelt wurde.\n\n"
-            "Wenn Sie Fragen oder Anmerkungen haben, zögern Sie bitte nicht, uns zu kontaktieren.",
+        "Der Hikage Finder wurde von der Universität Tokio in Zusammenarbeit mit dem Unternehmen Georepublic Japan entwickelt.\n\n"
+            "Für Fragen und Feedback stehen wir Ihnen gerne zur Verfügung.",
     "InfoPage.contact": "  contact@hikagefinder.jp",
 
     ///
     /// MapStartPage
     ///
-    "MapStartPage.title": "Wählen Sie Ihre Herkunft",
+    "MapStartPage.title": "Wählen Sie Ihren Startpunkt",
     "MapStartPage.message":
-        "Verschieben Sie die Karte und platzieren Sie die Nadel dort, wo Sie Ihre Route beginnen möchten.",
-    "MapStartPage.set": "Wählen Sie",
+        "Bewegen Sie die Karte und platzieren Sie die Markierung an der Startposition Ihrer Route.",
+    "MapStartPage.set": "Auswählen",
     "MapStartPage.cancel": "Abbrechen",
 
     ///
     /// MapStopPage
     ///
-    "MapStopPage.title": "Wählen Sie Ihr Reiseziel",
+    "MapStopPage.title": "Bestimmen Sie Ihren Zielort",
     "MapStopPage.message":
-        "Verschieben Sie die Karte und platzieren Sie die Stecknadel an der Stelle, an der Sie Ihre Route beenden möchten.",
-    "MapStopPage.set": "Wählen Sie",
+        "Bewegen Sie die Karte und platzieren Sie die Markierung an der Stelle, an der Sie Ihre Route beenden möchten.",
+    "MapStopPage.set": "Auswählen",
     "MapStopPage.cancel": "Abbrechen",
-    "MapStopPage.findRoute": "Finden Sie die Route",
+    "MapStopPage.findRoute": "Nach einer Route suchen",
     "MapStopPage.errorDlgTitle": "Fehler",
-    "MapStopPage.errorDlgMsg": "Keine Reiseroute gefunden",
-    "MapStopPage.errorDlgClose": "schließen",
+    "MapStopPage.errorDlgMsg": "Es wurder keine Route gefunden.",
+    "MapStopPage.errorDlgClose": "Schließen",
 
     ///
     /// RouteResultPage
     ///
-    "RouteResultPage.now": "Gehen Sie jetzt",
+    "RouteResultPage.now": "Sofort",
     "RouteResultPage.recommended": "EMPFOHLEN",
-    "RouteResultPage.sunlight": "Sonnenlicht",
-    "RouteResultPage.useRecommended": "Verwenden Sie die empfohlene Route",
-    "RouteResultPage.fastest": "SCHNELLSTE",
-    "RouteResultPage.useFastest": "Verwenden Sie die schnellste Route",
+    "RouteResultPage.sunlight": "Sonneneinstrahlung",
+    "RouteResultPage.useRecommended": "Auswahl der empfohlenen Route",
+    "RouteResultPage.fastest": "AM SCHNELLSTEN",
+    "RouteResultPage.useFastest": "Auswahl der kürzeste Route",
     "RouteResultPage.departure": "Abreise",
-    "RouteResultPage.findRoute": "Finden Sie die Route",
+    "RouteResultPage.findRoute": "Nach einer Route suchen",
     "RouteResultPage.errorDlgTitle": "Fehler",
-    "RouteResultPage.errorDlgMsg": "Keine Reiseroute gefunden",
-    "RouteResultPage.errorDlgClose": "schließen",
+    "RouteResultPage.errorDlgMsg": "Es wurder keine Route gefunden.",
+    "RouteResultPage.errorDlgClose": "Schließen",
 
     ///
     /// SelectedRoutePage
