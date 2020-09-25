@@ -80,11 +80,19 @@ class MapStopPageState extends State<MapStopPage> {
     );
   }
 
-  showErrorMsg() {
+  showErrorMsg(int res) {
+    String errMsg = StringParams.locale["MapStopPage.errorDlgMsg"];
+
+    if (res == 2) {
+      errMsg = StringParams.locale["MapStopPage.errorTimeDlgMsg"];
+    } else if (res == 3) {
+      errMsg = StringParams.locale["MapStopPage.errorAreaDlgMsg"];
+    }
+
     DialogUtil.showCustomDialog(
         context,
         StringParams.locale["MapStopPage.errorDlgTitle"],
-        StringParams.locale["MapStopPage.errorDlgMsg"],
+        errMsg,
         StringParams.locale["MapStopPage.errorDlgClose"],
         titleColor: Colors.red);
   }
@@ -101,8 +109,8 @@ class MapStopPageState extends State<MapStopPage> {
     Navigator.pop(context);
 
     if (!result) {
-      /// No Features
-      showErrorMsg();
+      /// No Features or other error
+      showErrorMsg(routeUtils.errorCode);
       return;
     }
 

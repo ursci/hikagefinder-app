@@ -186,10 +186,19 @@ class RouteResultPageState extends State<RouteResultPage> {
         drawRoute(false);
       });
     } else {
+      String errMsg = StringParams.locale["RouteResultPage.errorDlgMsg"];
+      int res = routeUtils.errorCode;
+
+      if (res == 2) {
+        errMsg = StringParams.locale["RouteResultPage.errorTimeDlgMsg"];
+      } else if (res == 3) {
+        errMsg = StringParams.locale["RouteResultPage.errorAreaDlgMsg"];
+      }
+
       DialogUtil.showCustomDialog(
           context,
           StringParams.locale["RouteResultPage.errorDlgTitle"],
-          StringParams.locale["RouteResultPage.errorDlgMsg"],
+          errMsg,
           StringParams.locale["RouteResultPage.errorDlgClose"],
           titleColor: Colors.red);
     }

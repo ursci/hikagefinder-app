@@ -39,6 +39,10 @@ class StringParams {
     "MapStopPage.findRoute": "Nach einer Route suchen",
     "MapStopPage.errorDlgTitle": "Fehler",
     "MapStopPage.errorDlgMsg": "Es wurder keine Route gefunden.",
+    "MapStopPage.errorTimeDlgMsg":
+        "Dieser Dienst ist nur von 8:00 bis 18:00 verfügbar",
+    "MapStopPage.errorAreaDlgMsg":
+        "Der ausgewählte Punkt ist außerhalb des Versorgungsbereichs.",
     "MapStopPage.errorDlgClose": "Schließen",
 
     ///
@@ -54,6 +58,10 @@ class StringParams {
     "RouteResultPage.findRoute": "Nach einer Route suchen",
     "RouteResultPage.errorDlgTitle": "Fehler",
     "RouteResultPage.errorDlgMsg": "Es wurder keine Route gefunden.",
+    "RouteResultPage.errorTimeDlgMsg":
+        "Dieser Dienst ist nur von 8:00 bis 18:00 verfügbar",
+    "RouteResultPage.errorAreaDlgMsg":
+        "Der ausgewählte Punkt ist außerhalb des Versorgungsbereichs.",
     "RouteResultPage.errorDlgClose": "Schließen",
 
     ///
@@ -104,6 +112,9 @@ class StringParams {
     "MapStopPage.findRoute": "Rechercher l'itinéraire",
     "MapStopPage.errorDlgTitle": "Erreur",
     "MapStopPage.errorDlgMsg": "Aucun itinéraire trouvé",
+    "MapStopPage.errorTimeDlgMsg": "Ce service ne fonctionne que de 8h à 18h",
+    "MapStopPage.errorAreaDlgMsg":
+        "Le service ne fonctionne qu’à Shibuya-ku. Les points sélectionnés sont en dehors de la zone desservie.",
     "MapStopPage.errorDlgClose": "Fermer",
 
     ///
@@ -119,6 +130,10 @@ class StringParams {
     "RouteResultPage.findRoute": "Rechercher l'itinéraire",
     "RouteResultPage.errorDlgTitle": "Erreur",
     "RouteResultPage.errorDlgMsg": "Aucun itinéraire trouvé",
+    "RouteResultPage.errorTimeDlgMsg":
+        "Ce service ne fonctionne que de 8h à 18h",
+    "RouteResultPage.errorAreaDlgMsg":
+        "Le service ne fonctionne qu’à Shibuya-ku. Les points sélectionnés sont en dehors de la zone desservie.",
     "RouteResultPage.errorDlgClose": "Fermer",
 
     ///
@@ -167,6 +182,10 @@ class StringParams {
     "MapStopPage.findRoute": "Looking For the Route",
     "MapStopPage.errorDlgTitle": "Error",
     "MapStopPage.errorDlgMsg": "No Route Found",
+    "MapStopPage.errorTimeDlgMsg":
+        "This service is operational only from 8am to 6pm",
+    "MapStopPage.errorAreaDlgMsg":
+        "Selected points are beyond the service area",
     "MapStopPage.errorDlgClose": "Close",
 
     ///
@@ -182,6 +201,10 @@ class StringParams {
     "RouteResultPage.findRoute": "Looking For the Route",
     "RouteResultPage.errorDlgTitle": "Error",
     "RouteResultPage.errorDlgMsg": "No Route Found",
+    "RouteResultPage.errorTimeDlgMsg":
+        "This service is operational only from 8am to 6pm",
+    "RouteResultPage.errorAreaDlgMsg":
+        "Selected points are beyond the service area",
     "RouteResultPage.errorDlgClose": "Close",
 
     ///
@@ -191,5 +214,5 @@ class StringParams {
     "SelectedRoutePage.return": "Return",
   };
 
-  static final Map<String, String> locale = de;
+  static final Map<String, String> locale = en;
 }
