@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hikageapp/res/ColorParams.dart';
 import 'package:hikageapp/res/StringsParams.dart';
 
 class InfoPage extends StatelessWidget {
@@ -38,7 +39,7 @@ class InfoPage extends StatelessWidget {
                 Icon(
                   Icons.map,
                   size: 60,
-                  color: Colors.blue[900],
+                  color: ColorParams.recommendedColor,
                 ),
                 SizedBox(
                   height: 20.0,
