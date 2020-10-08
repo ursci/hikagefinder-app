@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:hikageapp/res/ColorParams.dart';
 import 'package:hikageapp/res/GPSParams.dart';
 import 'package:hikageapp/res/StringsParams.dart';
 import 'package:hikageapp/utils/LocationUtils.dart';
@@ -94,7 +95,7 @@ class SelectedRoutePageState extends State<SelectedRoutePage> {
             child: Icon(
               Icons.my_location,
               size: 35.0,
-              color: Colors.blue[900],
+              color: ColorParams.recommendedColor,
             ),
           ),
         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geojson/geojson.dart';
 import 'package:hikageapp/pages/SelectedRoutePage.dart';
+import 'package:hikageapp/res/ColorParams.dart';
 import 'package:hikageapp/res/StringsParams.dart';
 import 'package:hikageapp/utils/DialogUtil.dart';
 import 'package:hikageapp/utils/LocationUtils.dart';
@@ -122,7 +123,7 @@ class RouteResultPageState extends State<RouteResultPage> {
 
     if (shortestFirst) {
       _polyLines.add(Polyline(
-        color: Colors.blue[900],
+        color: ColorParams.recommendedColor,
         points: _recommendedGeoJson.lines[0].geoSerie
             .toLatLng(), //[widget.startPos, widget.stopPos],
         strokeWidth: 6.0,
@@ -130,7 +131,7 @@ class RouteResultPageState extends State<RouteResultPage> {
       ));
 
       _polyLines.add(Polyline(
-        color: Colors.blue,
+        color: ColorParams.fastestColor,
         points: _shortestGeoJson.lines[0].geoSerie
             .toLatLng(), //[widget.startPos, widget.stopPos],
         strokeWidth: 6.0,
@@ -138,7 +139,7 @@ class RouteResultPageState extends State<RouteResultPage> {
       ));
     } else {
       _polyLines.add(Polyline(
-        color: Colors.blue,
+        color: ColorParams.fastestColor,
         points: _shortestGeoJson.lines[0].geoSerie
             .toLatLng(), //[widget.startPos, widget.stopPos],
         strokeWidth: 6.0,
@@ -146,7 +147,7 @@ class RouteResultPageState extends State<RouteResultPage> {
       ));
 
       _polyLines.add(Polyline(
-        color: Colors.blue[900],
+        color: ColorParams.recommendedColor,
         points: _recommendedGeoJson.lines[0].geoSerie
             .toLatLng(), //[widget.startPos, widget.stopPos],
         strokeWidth: 6.0,
@@ -347,7 +348,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
                         ),
-                        color: Colors.blue[900],
+                        color: ColorParams.recommendedColor,
                         child: Text(
                           StringParams.locale["RouteResultPage.useRecommended"],
                           style: TextStyle(fontSize: 16, color: Colors.white),
@@ -372,7 +373,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                         StringParams.locale["RouteResultPage.fastest"],
                         style: TextStyle(
                           fontFamily: 'Roboto',
-                          color: Colors.blue,
+                          color: ColorParams.fastestColor,
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                           fontStyle: FontStyle.normal,
@@ -409,7 +410,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
                         ),
-                        color: Colors.blue,
+                        color: ColorParams.fastestColor,
                         child: Text(
                           StringParams.locale["RouteResultPage.useFastest"],
                           style: TextStyle(fontSize: 16, color: Colors.white),
