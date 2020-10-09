@@ -263,7 +263,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                 });
               },
               icon: Icon(
-                Icons.search,
+                Icons.access_time,
                 color: Colors.black, //Color(0xff777777),
               ))
         ],
@@ -303,7 +303,7 @@ class RouteResultPageState extends State<RouteResultPage> {
               flex: 2,
               child: Container(
                 padding: EdgeInsets.only(left: 24.0, right: 24.0),
-                child: SingleChildScrollView(
+                // child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -344,7 +344,9 @@ class RouteResultPageState extends State<RouteResultPage> {
                       SizedBox(
                         height: 5.0,
                       ),
-                      RaisedButton(
+                      SizedBox(
+                        width: double.infinity,
+                        child: RaisedButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
                         ),
@@ -365,6 +367,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                             ),
                           ),
                         ),
+                      ),
                       ),
                       SizedBox(
                         height: 5.0,
@@ -406,12 +409,14 @@ class RouteResultPageState extends State<RouteResultPage> {
                       SizedBox(
                         height: 5.0,
                       ),
-                      RaisedButton(
+                      SizedBox(
+                        width: double.infinity,
+                        child: RaisedButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
                         ),
                         color: ColorParams.fastestColor,
-                        child: Text(
+                          child: Text(
                           StringParams.locale["RouteResultPage.useFastest"],
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
@@ -426,9 +431,10 @@ class RouteResultPageState extends State<RouteResultPage> {
                             ),
                           ),
                         ),
-                      )
+                      ),
+                      ),
                     ],
-                  ),
+                  // ),
                 ),
               ),
             ),
