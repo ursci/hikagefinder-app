@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:hikageapp/pages/InfoPage.dart';
 import 'package:hikageapp/pages/MapStartPage.dart';
+import 'package:hikageapp/res/ColorParams.dart';
 import 'package:hikageapp/res/StringsParams.dart';
 import 'package:hikageapp/utils/LocationUtils.dart';
 import 'package:hikageapp/utils/MapTileUtils.dart';
@@ -144,7 +145,7 @@ class MainPageState extends State<MainPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ),
-                    color: Colors.blue[900],
+                    color: ColorParams.recommendedColor,
                     child: Text(
                       StringParams.locale["MainPage.start"],
                       style: TextStyle(fontSize: 16, color: Colors.white),

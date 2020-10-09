@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:hikageapp/pages/RouteResultPage.dart';
+import 'package:hikageapp/res/ColorParams.dart';
 import 'package:hikageapp/res/StringsParams.dart';
 import 'package:hikageapp/utils/DialogUtil.dart';
 import 'package:hikageapp/utils/LocationUtils.dart';
@@ -80,11 +81,19 @@ class MapStopPageState extends State<MapStopPage> {
     );
   }
 
-  showErrorMsg() {
+  showErrorMsg(int res) {
+    String errMsg = StringParams.locale["MapStopPage.errorDlgMsg"];
+
+    if (res == 2) {
+      errMsg = StringParams.locale["MapStopPage.errorTimeDlgMsg"];
+    } else if (res == 3) {
+      errMsg = StringParams.locale["MapStopPage.errorAreaDlgMsg"];
+    }
+
     DialogUtil.showCustomDialog(
         context,
         StringParams.locale["MapStopPage.errorDlgTitle"],
-        StringParams.locale["MapStopPage.errorDlgMsg"],
+        errMsg,
         StringParams.locale["MapStopPage.errorDlgClose"],
         titleColor: Colors.red);
   }
@@ -101,8 +110,8 @@ class MapStopPageState extends State<MapStopPage> {
     Navigator.pop(context);
 
     if (!result) {
-      /// No Features
-      showErrorMsg();
+      /// No Features or other error
+      showErrorMsg(routeUtils.errorCode);
       return;
     }
 
@@ -223,7 +232,7 @@ class MapStopPageState extends State<MapStopPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
                           ),
-                          color: Colors.blue[900],
+                          color: ColorParams.recommendedColor,
                           child: Text(
                             StringParams.locale["MapStopPage.set"],
                             style: TextStyle(fontSize: 16, color: Colors.white),

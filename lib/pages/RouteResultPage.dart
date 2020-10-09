@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geojson/geojson.dart';
 import 'package:hikageapp/pages/SelectedRoutePage.dart';
+import 'package:hikageapp/res/ColorParams.dart';
 import 'package:hikageapp/res/StringsParams.dart';
 import 'package:hikageapp/utils/DialogUtil.dart';
 import 'package:hikageapp/utils/LocationUtils.dart';
@@ -122,7 +123,7 @@ class RouteResultPageState extends State<RouteResultPage> {
 
     if (shortestFirst) {
       _polyLines.add(Polyline(
-        color: Colors.blue[900],
+        color: ColorParams.recommendedColor,
         points: _recommendedGeoJson.lines[0].geoSerie
             .toLatLng(), //[widget.startPos, widget.stopPos],
         strokeWidth: 6.0,
@@ -130,7 +131,7 @@ class RouteResultPageState extends State<RouteResultPage> {
       ));
 
       _polyLines.add(Polyline(
-        color: Colors.blue,
+        color: ColorParams.fastestColor,
         points: _shortestGeoJson.lines[0].geoSerie
             .toLatLng(), //[widget.startPos, widget.stopPos],
         strokeWidth: 6.0,
@@ -138,7 +139,7 @@ class RouteResultPageState extends State<RouteResultPage> {
       ));
     } else {
       _polyLines.add(Polyline(
-        color: Colors.blue,
+        color: ColorParams.fastestColor,
         points: _shortestGeoJson.lines[0].geoSerie
             .toLatLng(), //[widget.startPos, widget.stopPos],
         strokeWidth: 6.0,
@@ -146,7 +147,7 @@ class RouteResultPageState extends State<RouteResultPage> {
       ));
 
       _polyLines.add(Polyline(
-        color: Colors.blue[900],
+        color: ColorParams.recommendedColor,
         points: _recommendedGeoJson.lines[0].geoSerie
             .toLatLng(), //[widget.startPos, widget.stopPos],
         strokeWidth: 6.0,
@@ -186,10 +187,19 @@ class RouteResultPageState extends State<RouteResultPage> {
         drawRoute(false);
       });
     } else {
+      String errMsg = StringParams.locale["RouteResultPage.errorDlgMsg"];
+      int res = routeUtils.errorCode;
+
+      if (res == 2) {
+        errMsg = StringParams.locale["RouteResultPage.errorTimeDlgMsg"];
+      } else if (res == 3) {
+        errMsg = StringParams.locale["RouteResultPage.errorAreaDlgMsg"];
+      }
+
       DialogUtil.showCustomDialog(
           context,
           StringParams.locale["RouteResultPage.errorDlgTitle"],
-          StringParams.locale["RouteResultPage.errorDlgMsg"],
+          errMsg,
           StringParams.locale["RouteResultPage.errorDlgClose"],
           titleColor: Colors.red);
     }
@@ -253,7 +263,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                 });
               },
               icon: Icon(
-                Icons.search,
+                Icons.access_time,
                 color: Colors.black, //Color(0xff777777),
               ))
         ],
@@ -291,54 +301,56 @@ class RouteResultPageState extends State<RouteResultPage> {
             ),
             Expanded(
               flex: 2,
-              child: Container(
-                padding: EdgeInsets.only(left: 24.0, right: 24.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        StringParams.locale["RouteResultPage.recommended"],
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          color: Colors.blue[900],
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.normal,
-                          letterSpacing: 2,
+              child: SingleChildScrollView(
+                padding: EdgeInsets.only(top: 18.0, left: 24.0, right: 24.0),
+                // child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      StringParams.locale["RouteResultPage.recommended"],
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        color: Colors.blue[900],
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.normal,
+                        letterSpacing: 2,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(Icons.wb_sunny),
+                        SizedBox(
+                          width: 10.0,
                         ),
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(Icons.wb_sunny),
-                          SizedBox(
-                            width: 10.0,
+                        Text(
+                          "${_recoSunLight.toStringAsFixed(2)}% ${StringParams.locale["RouteResultPage.sunlight"]}",
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            color: Color(0xff6c6c6c),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: 0.1625,
                           ),
-                          Text(
-                            "${_recoSunLight.toStringAsFixed(2)}% ${StringParams.locale["RouteResultPage.sunlight"]}",
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              color: Color(0xff6c6c6c),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                              letterSpacing: 0.1625,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      RaisedButton(
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: RaisedButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
                         ),
-                        color: Colors.blue[900],
+                        color: ColorParams.recommendedColor,
                         child: Text(
                           StringParams.locale["RouteResultPage.useRecommended"],
                           style: TextStyle(fontSize: 16, color: Colors.white),
@@ -356,51 +368,54 @@ class RouteResultPageState extends State<RouteResultPage> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 5.0,
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Text(
+                      StringParams.locale["RouteResultPage.fastest"],
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        color: ColorParams.fastestColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.normal,
+                        letterSpacing: 2,
                       ),
-                      Text(
-                        StringParams.locale["RouteResultPage.fastest"],
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          color: Colors.blue,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.normal,
-                          letterSpacing: 2,
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(Icons.wb_sunny),
+                        SizedBox(
+                          width: 10.0,
                         ),
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(Icons.wb_sunny),
-                          SizedBox(
-                            width: 10.0,
+                        Text(
+                          "${_shortSunLight.toStringAsFixed(2)}% ${StringParams.locale["RouteResultPage.sunlight"]}",
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            color: Color(0xff6c6c6c),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: 0.1625,
                           ),
-                          Text(
-                            "${_shortSunLight.toStringAsFixed(2)}% ${StringParams.locale["RouteResultPage.sunlight"]}",
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              color: Color(0xff6c6c6c),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                              letterSpacing: 0.1625,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      RaisedButton(
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: RaisedButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
                         ),
-                        color: Colors.blue,
+                        color: ColorParams.fastestColor,
                         child: Text(
                           StringParams.locale["RouteResultPage.useFastest"],
                           style: TextStyle(fontSize: 16, color: Colors.white),
@@ -416,9 +431,10 @@ class RouteResultPageState extends State<RouteResultPage> {
                             ),
                           ),
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    ),
+                  ],
+                  // ),
                 ),
               ),
             ),

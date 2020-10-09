@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:hikageapp/res/ColorParams.dart';
 import 'package:hikageapp/res/GPSParams.dart';
 import 'package:hikageapp/res/StringsParams.dart';
 import 'package:hikageapp/utils/LocationUtils.dart';
@@ -94,7 +95,7 @@ class SelectedRoutePageState extends State<SelectedRoutePage> {
             child: Icon(
               Icons.my_location,
               size: 35.0,
-              color: Colors.blue[900],
+              color: ColorParams.recommendedColor,
             ),
           ),
         ),
@@ -125,6 +126,9 @@ class SelectedRoutePageState extends State<SelectedRoutePage> {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Color(0xff777777),
+        ),
         title: Text(
           _routeText + " ${StringParams.locale["SelectedRoutePage.route"]}",
           style: TextStyle(
@@ -132,17 +136,11 @@ class SelectedRoutePageState extends State<SelectedRoutePage> {
           ),
         ),
         centerTitle: true,
-        iconTheme: IconThemeData(
-          color: Color(0xff777777),
-        ),
+
         backgroundColor: Colors.white,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
       ),
       body: Center(
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              flex: 7,
               child: Stack(
                 children: <Widget>[
                   flutterMap,
@@ -169,29 +167,7 @@ class SelectedRoutePageState extends State<SelectedRoutePage> {
                 ],
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: Container(
-                padding: EdgeInsets.only(left: 24.0, right: 24.0),
-                child: Center(
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ),
-                    color: Colors.blue[900],
-                    child: Text(
-                      StringParams.locale["SelectedRoutePage.return"],
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+        );
   }
 
   @override
