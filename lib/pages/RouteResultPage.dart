@@ -301,52 +301,52 @@ class RouteResultPageState extends State<RouteResultPage> {
             ),
             Expanded(
               flex: 2,
-              child: Container(
-                padding: EdgeInsets.only(left: 24.0, right: 24.0),
+              child: SingleChildScrollView(
+                padding: EdgeInsets.only(top: 18.0, left: 24.0, right: 24.0),
                 // child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        StringParams.locale["RouteResultPage.recommended"],
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          color: Colors.blue[900],
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.normal,
-                          letterSpacing: 2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      StringParams.locale["RouteResultPage.recommended"],
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        color: Colors.blue[900],
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.normal,
+                        letterSpacing: 2,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(Icons.wb_sunny),
+                        SizedBox(
+                          width: 10.0,
                         ),
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(Icons.wb_sunny),
-                          SizedBox(
-                            width: 10.0,
+                        Text(
+                          "${_recoSunLight.toStringAsFixed(2)}% ${StringParams.locale["RouteResultPage.sunlight"]}",
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            color: Color(0xff6c6c6c),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: 0.1625,
                           ),
-                          Text(
-                            "${_recoSunLight.toStringAsFixed(2)}% ${StringParams.locale["RouteResultPage.sunlight"]}",
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              color: Color(0xff6c6c6c),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                              letterSpacing: 0.1625,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: RaisedButton(
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: RaisedButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
                         ),
@@ -368,55 +368,55 @@ class RouteResultPageState extends State<RouteResultPage> {
                           ),
                         ),
                       ),
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Text(
+                      StringParams.locale["RouteResultPage.fastest"],
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        color: ColorParams.fastestColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.normal,
+                        letterSpacing: 2,
                       ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      Text(
-                        StringParams.locale["RouteResultPage.fastest"],
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          color: ColorParams.fastestColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.normal,
-                          letterSpacing: 2,
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(Icons.wb_sunny),
+                        SizedBox(
+                          width: 10.0,
                         ),
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(Icons.wb_sunny),
-                          SizedBox(
-                            width: 10.0,
+                        Text(
+                          "${_shortSunLight.toStringAsFixed(2)}% ${StringParams.locale["RouteResultPage.sunlight"]}",
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            color: Color(0xff6c6c6c),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: 0.1625,
                           ),
-                          Text(
-                            "${_shortSunLight.toStringAsFixed(2)}% ${StringParams.locale["RouteResultPage.sunlight"]}",
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              color: Color(0xff6c6c6c),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                              letterSpacing: 0.1625,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: RaisedButton(
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: RaisedButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
                         ),
                         color: ColorParams.fastestColor,
-                          child: Text(
+                        child: Text(
                           StringParams.locale["RouteResultPage.useFastest"],
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
@@ -432,8 +432,8 @@ class RouteResultPageState extends State<RouteResultPage> {
                           ),
                         ),
                       ),
-                      ),
-                    ],
+                    ),
+                  ],
                   // ),
                 ),
               ),
