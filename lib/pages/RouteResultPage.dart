@@ -32,6 +32,10 @@ class RouteResultPageState extends State<RouteResultPage> {
   GeoJson _shortestGeoJson;
   double _recoSunLight;
   double _shortSunLight;
+  int _recoTime;
+  int _shortTime;
+  int _recoDist;
+  int _shortDist;
 
   LatLng _initialPoint = LatLng(35.6592979, 139.7005656);
 
@@ -114,10 +118,13 @@ class RouteResultPageState extends State<RouteResultPage> {
   }
 
   drawRoute(bool shortestFirst) {
-    _recoSunLight =
-        _recommendedGeoJson.features[0].properties["sunlight_rate"] * 100;
+    _recoSunLight = (_recommendedGeoJson.features[0].properties["sunlight_rate"] * 100).roundToDouble();
     _shortSunLight =
-        _shortestGeoJson.features[0].properties["sunlight_rate"] * 100;
+        (_shortestGeoJson.features[0].properties["sunlight_rate"] * 100).roundToDouble();
+    _recoTime = (_recommendedGeoJson.features[0].properties["total_minutes"] ).round();
+    _shortTime = (_shortestGeoJson.features[0].properties["total_minutes"] ).round();
+    _recoDist = (_recommendedGeoJson.features[0].properties["total_distance"] ).round();
+    _shortDist = (_shortestGeoJson.features[0].properties["total_distance"] ).round();
 
     _polyLines.clear();
 
@@ -329,7 +336,16 @@ class RouteResultPageState extends State<RouteResultPage> {
                           width: 10.0,
                         ),
                         Text(
-                          "${_recoSunLight.toStringAsFixed(2)}% ${StringParams.locale["RouteResultPage.sunlight"]}",
+                          "${_shortSunLight.toStringAsFixed(0)}%",
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            color: Color(0xff6c6c6c),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: 0.1625,),
+                        ),
+                        Text("${StringParams.locale["RouteResultPage.sunlight"]}, ${_recoTime.toStringAsFixed(0)}min., ${_recoDist.toStringAsFixed(0)}m.",
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             color: Color(0xff6c6c6c),
@@ -394,7 +410,16 @@ class RouteResultPageState extends State<RouteResultPage> {
                           width: 10.0,
                         ),
                         Text(
-                          "${_shortSunLight.toStringAsFixed(2)}% ${StringParams.locale["RouteResultPage.sunlight"]}",
+                          "${_shortSunLight.toStringAsFixed(0)}%",
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            color: Color(0xff6c6c6c),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: 0.1625,),
+                        ),
+                        Text("${StringParams.locale["RouteResultPage.sunlight"]}, ${_shortTime.toStringAsFixed(0)}min., ${_shortDist.toStringAsFixed(0)}m.",
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             color: Color(0xff6c6c6c),
