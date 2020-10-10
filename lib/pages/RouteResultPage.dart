@@ -345,7 +345,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                             fontStyle: FontStyle.normal,
                             letterSpacing: 0.1625,),
                         ),
-                        Text("${StringParams.locale["RouteResultPage.sunlight"]}, ${_recoTime.toStringAsFixed(0)}min., ${_recoDist.toStringAsFixed(0)}m.",
+                        Text("${StringParams.locale["RouteResultPage.sunlight"]}, ${_recoTime.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.minutes"]}, ${_recoDist.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.meters"]}",
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             color: Color(0xff6c6c6c),
@@ -419,7 +419,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                             fontStyle: FontStyle.normal,
                             letterSpacing: 0.1625,),
                         ),
-                        Text("${StringParams.locale["RouteResultPage.sunlight"]}, ${_shortTime.toStringAsFixed(0)}min., ${_shortDist.toStringAsFixed(0)}m.",
+                        Text("${StringParams.locale["RouteResultPage.sunlight"]}, ${_shortTime.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.minutes"]}, ${_shortDist.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.meters"]}",
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             color: Color(0xff6c6c6c),

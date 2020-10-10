@@ -1,5 +1,71 @@
 class StringParams {
-  static final Map<String, String> jp = {};
+  static final Map<String, String> jp = {
+    ///
+    /// MainPage
+    ///
+    "MainPage.start": "スタート",
+
+    ///
+    /// InfoPage
+    ///
+    "ImfoPage.appbar_title": "について",
+    "InfoPage.title": "ヒカゲ・ファインダーとは?",
+    "InfoPage.text": "ヒカゲ・ファインダー では、2つの場所間の最短ルート、最短ルートに近いのに日照量が少ない方のルートを表示してくれます。",
+    "InfoPage.text2":
+    "ヒカゲ・ファインダー は、東京大学がジョーリパブリックと共同で開発したサービスです。\n\n"
+        "ご質問やご意見がございましたら、お気軽にお問い合わせください。",
+    "InfoPage.contact": "  contact@hikagefinder.jp",
+
+    ///
+    /// MapStartPage
+    ///
+    "MapStartPage.title": "出発地を選択してください",
+    "MapStartPage.message":
+    "地図を移動して、ルートを開始したい場所にピンをドロップします。",
+    "MapStartPage.set": "選を問う",
+    "MapStartPage.cancel": "キャンセール",///
+    /// MapStopPage
+    ///
+    "MapStopPage.title": "目的地を選択してください",
+    "MapStopPage.message": "地図を移動して、到着したい場所にピンを配置します。",
+    "MapStopPage.set": "選を問う",
+    "MapStopPage.cancel": "キャンセール",
+    "MapStopPage.findRoute": "現在のルートを探す...",
+    "MapStopPage.errorDlgTitle": "エラー...",
+    "MapStopPage.errorDlgMsg": "ルートは見つかりませんでした。",
+    "MapStopPage.errorTimeDlgMsg": "朝8時から18時までのみの運行となります。",
+    "MapStopPage.errorAreaDlgMsg":
+    "選択されたポイントはサービスエリア外となります。このバージョンは渋谷区限定で動作します。",
+    "MapStopPage.errorDlgClose": "閉じる",
+
+    ///
+    /// RouteResultPage
+    ///
+    "RouteResultPage.now": "今すぐ",
+    "RouteResultPage.recommended": "おすすめのルート",
+    "RouteResultPage.sunlight": "日差し",
+    "RouteResultPage.minutes": "分",
+    "RouteResultPage.meters": "m",
+    "RouteResultPage.useRecommended": "おすすめのルートを使う",
+    "RouteResultPage.fastest": "最速のルート",
+    "RouteResultPage.useFastest": "最速のルートを使う",
+    "RouteResultPage.departure": "出て行け",
+    "RouteResultPage.findRoute": "ルートを検索する",
+    "RouteResultPage.errorDlgTitle": "エラー...",
+    "RouteResultPage.errorDlgMsg": "旅程は見つかりませんでした。設定を変更して再度お試しください。",
+    "RouteResultPage.errorTimeDlgMsg":
+    "朝8時から18時までのみの運行となります。",
+    "RouteResultPage.errorAreaDlgMsg":
+    "選択されたポイントはサービスエリア外となります。このバージョンは渋谷区限定で動作します。",
+    "RouteResultPage.errorDlgClose": "閉じる",
+
+    ///
+    /// SelectedRoutePage
+    ///
+    "SelectedRoutePage.route": "ルート",
+    "SelectedRoutePage.return": "戻る",
+  };
+
 
   static final Map<String, String> de = {
     ///
@@ -22,27 +88,27 @@ class StringParams {
     ///
     /// MapStartPage
     ///
-    "MapStartPage.title": "Wählen Sie Ihren Startpunkt",
+    "MapStartPage.title": "Startpunkt",
     "MapStartPage.message":
-        "Bewegen Sie die Karte und platzieren Sie die Markierung an der Startposition Ihrer Route.",
+        "Bewegen Sie die Karte und platzieren Sie die Markierung am Startpunkt Ihrer Route.",
     "MapStartPage.set": "Auswählen",
     "MapStartPage.cancel": "Abbrechen",
 
     ///
     /// MapStopPage
     ///
-    "MapStopPage.title": "Bestimmen Sie Ihren Zielort",
+    "MapStopPage.title": "Zielort",
     "MapStopPage.message":
-        "Bewegen Sie die Karte und platzieren Sie die Markierung an der Stelle, an der Sie Ihre Route beenden möchten.",
+        "Bewegen Sie die Karte und platzieren Sie die Markierung am Ziel Ihrer Route.",
     "MapStopPage.set": "Auswählen",
     "MapStopPage.cancel": "Abbrechen",
     "MapStopPage.findRoute": "Nach einer Route suchen",
     "MapStopPage.errorDlgTitle": "Fehler",
-    "MapStopPage.errorDlgMsg": "Es wurder keine Route gefunden.",
+    "MapStopPage.errorDlgMsg": "Es wurder keine Route gefunden. Versuchen Sie es erneut, indem Sie die Einstellungen ändern.",
     "MapStopPage.errorTimeDlgMsg":
         "Dieser Dienst ist nur von 8:00 bis 18:00 verfügbar",
     "MapStopPage.errorAreaDlgMsg":
-        "Der ausgewählte Punkt ist außerhalb des Versorgungsbereichs.",
+        "Die ausgewählten Punkte liegen außerhalb des Versorgungsbereichs. Diese Version funktioniert nur für Shibuya-ku.",
     "MapStopPage.errorDlgClose": "Schließen",
 
     ///
@@ -50,18 +116,20 @@ class StringParams {
     ///
     "RouteResultPage.now": "Sofort",
     "RouteResultPage.recommended": "EMPFOHLEN",
-    "RouteResultPage.sunlight": "Sonneneinstrahlung",
+    "RouteResultPage.sunlight": "Sonne",
+    "RouteResultPage.minutes": "Min.",
+    "RouteResultPage.meters": "m",
     "RouteResultPage.useRecommended": "Auswahl der empfohlenen Route",
     "RouteResultPage.fastest": "AM SCHNELLSTEN",
     "RouteResultPage.useFastest": "Auswahl der kürzeste Route",
     "RouteResultPage.departure": "Abreise",
     "RouteResultPage.findRoute": "Nach einer Route suchen",
     "RouteResultPage.errorDlgTitle": "Fehler",
-    "RouteResultPage.errorDlgMsg": "Es wurder keine Route gefunden.",
+    "RouteResultPage.errorDlgMsg": "Es wurder keine Route gefunden. Versuchen Sie es erneut, indem Sie die Einstellungen ändern.",
     "RouteResultPage.errorTimeDlgMsg":
         "Dieser Dienst ist nur von 8:00 bis 18:00 verfügbar",
     "RouteResultPage.errorAreaDlgMsg":
-        "Der ausgewählte Punkt ist außerhalb des Versorgungsbereichs.",
+        "Die ausgewählten Punkte liegen außerhalb des Versorgungsbereichs. Diese Version funktioniert nur für Shibuya-ku.",
     "RouteResultPage.errorDlgClose": "Schließen",
 
     ///
@@ -75,7 +143,7 @@ class StringParams {
     ///
     /// MainPage
     ///
-    "MainPage.start": "Début",
+    "MainPage.start": "Démarrer",
 
     ///
     /// InfoPage
@@ -88,15 +156,15 @@ class StringParams {
     "InfoPage.text2":
         "Hikage Finder est un service développé par l'Université de Tokyo "
             "en collaboration avec Georepublic Japan.\n\n"
-            "POur toutes questions ou commentaires, n'hésitez pas à nous contacter",
+            "Pour toutes questions ou commentaires, n'hésitez pas à nous contacter",
     "InfoPage.contact": "  contact@hikagefinder.jp",
 
     ///
     /// MapStartPage
     ///
-    "MapStartPage.title": "Sélectionnez votre origine",
+    "MapStartPage.title": "Choisir le lieu de départ",
     "MapStartPage.message":
-        "Déplacez la carte et déposez l'épingle à l'endroit où vous "
+        "Déplacez la carte et déposez le pointeur à l'endroit où vous "
             "souhaitez démarrer votre itinéraire.",
     "MapStartPage.set": "Sélectionner",
     "MapStartPage.cancel": "Annuler",
@@ -104,36 +172,38 @@ class StringParams {
     ///
     /// MapStopPage
     ///
-    "MapStopPage.title": "Sélectionnez votre destination",
-    "MapStopPage.message": "Déplacez la carte et déposez l'épingle à l'endroit "
+    "MapStopPage.title": "Choisir le lieu d'arrivée",
+    "MapStopPage.message": "Déplacez la carte et déposez le pointeur à l'endroit "
         "où vous souhaitez terminer votre itinéraire.",
     "MapStopPage.set": "Sélectionner",
     "MapStopPage.cancel": "Annuler",
     "MapStopPage.findRoute": "Rechercher l'itinéraire",
-    "MapStopPage.errorDlgTitle": "Erreur",
-    "MapStopPage.errorDlgMsg": "Aucun itinéraire trouvé",
-    "MapStopPage.errorTimeDlgMsg": "Ce service ne fonctionne que de 8h à 18h",
+    "MapStopPage.errorDlgTitle": "Erreur...",
+    "MapStopPage.errorDlgMsg": "Aucun itinéraire trouvé.",
+    "MapStopPage.errorTimeDlgMsg": "Ce service ne fonctionne que de 8h à 18h.",
     "MapStopPage.errorAreaDlgMsg":
-        "Le service ne fonctionne qu’à Shibuya-ku. Les points sélectionnés sont en dehors de la zone desservie.",
+        "Les points sélectionnés sont en dehors de la zone desservie. Cette version fonctionne seulement pour Shibuya-ku.",
     "MapStopPage.errorDlgClose": "Fermer",
 
     ///
     /// RouteResultPage
     ///
-    "RouteResultPage.now": "Partir maintenant",
+    "RouteResultPage.now": "maintenant",
     "RouteResultPage.recommended": "RECOMMANDÉ",
-    "RouteResultPage.sunlight": "Exposition au soleil",
+    "RouteResultPage.sunlight": "au soleil",
+    "RouteResultPage.minutes": "min.",
+    "RouteResultPage.meters": "m.",
     "RouteResultPage.useRecommended": "Utiliser l'itinéraire recommandé",
     "RouteResultPage.fastest": "LE PLUS RAPIDE",
     "RouteResultPage.useFastest": "Utiliser l'itinéraire le plus rapide",
-    "RouteResultPage.departure": "Départ",
+    "RouteResultPage.departure": "Partir",
     "RouteResultPage.findRoute": "Rechercher l'itinéraire",
-    "RouteResultPage.errorDlgTitle": "Erreur",
-    "RouteResultPage.errorDlgMsg": "Aucun itinéraire trouvé",
+    "RouteResultPage.errorDlgTitle": "Erreur...",
+    "RouteResultPage.errorDlgMsg": "Aucun itinéraire trouvé. Essayez de nouveau en modifiant les paramètres.",
     "RouteResultPage.errorTimeDlgMsg":
         "Ce service ne fonctionne que de 8h à 18h",
     "RouteResultPage.errorAreaDlgMsg":
-        "Le service ne fonctionne qu’à Shibuya-ku. Les points sélectionnés sont en dehors de la zone desservie.",
+        "Les points sélectionnés sont en dehors de la zone desservie. Cette version fonctionne seulement pour Shibuya-ku.",
     "RouteResultPage.errorDlgClose": "Fermer",
 
     ///
@@ -179,13 +249,13 @@ class StringParams {
         "Move the map and drop the pin at the location where you want to end your route.",
     "MapStopPage.set": "Set",
     "MapStopPage.cancel": "Cancel",
-    "MapStopPage.findRoute": "Looking For the Route",
+    "MapStopPage.findRoute": "Looking for the route",
     "MapStopPage.errorDlgTitle": "Error",
-    "MapStopPage.errorDlgMsg": "No Route Found",
+    "MapStopPage.errorDlgMsg": "No itinerary found. Try again by changing the parameters.",
     "MapStopPage.errorTimeDlgMsg":
         "This service is operational only from 8am to 6pm",
     "MapStopPage.errorAreaDlgMsg":
-        "Selected points are beyond the service area",
+        "The selected points are outside the service area. This version works only for Shibuya-ku.",
     "MapStopPage.errorDlgClose": "Close",
 
     ///
@@ -194,17 +264,19 @@ class StringParams {
     "RouteResultPage.now": "Now",
     "RouteResultPage.recommended": "RECOMMENDED",
     "RouteResultPage.sunlight": "Sunlight",
+    "RouteResultPage.minutes": "min.",
+    "RouteResultPage.meters": "m.",
     "RouteResultPage.useRecommended": "Use Recommended Route",
     "RouteResultPage.fastest": "FASTEST",
     "RouteResultPage.useFastest": "Use Fastest Route",
     "RouteResultPage.departure": "Departure",
-    "RouteResultPage.findRoute": "Looking For the Route",
+    "RouteResultPage.findRoute": "Looking for the Route",
     "RouteResultPage.errorDlgTitle": "Error",
-    "RouteResultPage.errorDlgMsg": "No Route Found",
+    "RouteResultPage.errorDlgMsg": "No itinerary found. Try again by changing the parameters.",
     "RouteResultPage.errorTimeDlgMsg":
-        "This service is operational only from 8am to 6pm",
+        "This service is operational only from 8am to 6pm.",
     "RouteResultPage.errorAreaDlgMsg":
-        "Selected points are beyond the service area",
+        "The selected points are outside the service area. This version works only for Shibuya-ku.",
     "RouteResultPage.errorDlgClose": "Close",
 
     ///

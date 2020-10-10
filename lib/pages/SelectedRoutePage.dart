@@ -130,7 +130,7 @@ class SelectedRoutePageState extends State<SelectedRoutePage> {
           color: Color(0xff777777),
         ),
         title: Text(
-          _routeText + " ${StringParams.locale["SelectedRoutePage.route"]}",
+          _routeText, // + " ${StringParams.locale["SelectedRoutePage.route"]}",
           style: TextStyle(
             color: Color(0xff777777),
           ),

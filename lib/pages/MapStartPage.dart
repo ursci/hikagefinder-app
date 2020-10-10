@@ -151,6 +151,9 @@ class MapStartPageState extends State<MapStartPage> {
                         letterSpacing: 2,
                       ),
                     ),
+                    SizedBox(
+                      height: 9.0,
+                    ),
                     Text(
                       StringParams.locale["MapStartPage.message"],
                       style: TextStyle(

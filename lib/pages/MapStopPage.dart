@@ -211,6 +211,9 @@ class MapStopPageState extends State<MapStopPage> {
                         letterSpacing: 2,
                       ),
                     ),
+                    SizedBox(
+                      height: 9.0,
+                    ),
                     Text(
                       StringParams.locale["MapStopPage.message"],
                       style: TextStyle(
