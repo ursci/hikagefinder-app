@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:hikageapp/res/ColorParams.dart';
 import 'package:hikageapp/res/GPSParams.dart';
-import 'package:hikageapp/res/StringsParams.dart';
 import 'package:hikageapp/utils/LocationUtils.dart';
 import 'package:hikageapp/utils/MapTileUtils.dart';
 import 'package:latlong/latlong.dart';
@@ -136,38 +135,36 @@ class SelectedRoutePageState extends State<SelectedRoutePage> {
           ),
         ),
         centerTitle: true,
-
         backgroundColor: Colors.white,
         automaticallyImplyLeading: true,
       ),
       body: Center(
-              child: Stack(
-                children: <Widget>[
-                  flutterMap,
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 20.0, 30.0),
-                      child: FloatingActionButton(
-                        backgroundColor: Colors.white,
-                        child: Icon(
-                          Icons.my_location,
-                          color: Colors.blue[900],
-                          size: 38.0,
-                        ),
-                        onPressed: () async {
-                          await getPresentPos();
-                          drawGpsPos(_initialPoint);
-                          _mapController.move(
-                              _initialPoint, _mapController.zoom);
-                        },
-                      ),
-                    ),
+        child: Stack(
+          children: <Widget>[
+            flutterMap,
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, 20.0, 30.0),
+                child: FloatingActionButton(
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    Icons.my_location,
+                    color: Colors.blue[900],
+                    size: 38.0,
                   ),
-                ],
+                  onPressed: () async {
+                    await getPresentPos();
+                    drawGpsPos(_initialPoint);
+                    _mapController.move(_initialPoint, _mapController.zoom);
+                  },
+                ),
               ),
             ),
-        );
+          ],
+        ),
+      ),
+    );
   }
 
   @override

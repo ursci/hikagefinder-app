@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hikageapp/pages/SplashPage.dart';
-import 'package:flutter_launcher_icons/android.dart';
 
 void main() {
   runApp(MyApp());
