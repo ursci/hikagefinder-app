@@ -337,7 +337,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                           width: 10.0,
                         ),
                         Text(
-                          "${_shortSunLight.toStringAsFixed(0)}%",
+                          "${_recoSunLight.toStringAsFixed(0)}%",
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             color: Color(0xff6c6c6c),
