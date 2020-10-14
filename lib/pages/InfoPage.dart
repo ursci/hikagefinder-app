@@ -30,15 +30,101 @@ class InfoPageState extends State<InfoPage> {
       ),
       body: Center(
         child: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.all(20.0),
-            width: 350.0,
-            color: Colors.white,
+          padding: EdgeInsets.only(top: 24.0, left: 24.0, right: 24.0),
+          // I removed this container layer.
+          //child: Container(
+            //width: 350.0,
+            //color: Colors.white,
             //child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               //crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+                SizedBox(
+                  height: 10.0,
+                ),
+                ButtonTheme(
+                  minWidth: 300.0,
+                  //height: 35.0,
+                  child: RaisedButton(
+                    child: Text(
+                      "ENGLISH",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
+                    color: StringParams.locale["lang"] == "en"
+                        ? ColorParams.fastestColor
+                        : ColorParams.recommendedColor,
+                    onPressed: () => setState(() {
+                      StringParams.locale = StringParams.en;
+                    }),
+                  ),
+                ),
+                ButtonTheme(
+                  minWidth: 300.0,
+                  //height: 35.0,
+                  child: RaisedButton(
+                    child: Text(
+                      "日本語",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
+                    color: StringParams.locale["lang"] == "jp"
+                        ? ColorParams.fastestColor
+                        : ColorParams.recommendedColor,
+                    onPressed: () => setState(() {
+                      StringParams.locale = StringParams.jp;
+                    }),
+                  ),
+                ),
+                ButtonTheme(
+                  minWidth: 300.0,
+                  //height: 35.0,
+                  child: RaisedButton(
+                    child: Text(
+                      "DEUTSCH",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
+                    color: StringParams.locale["lang"] == "de"
+                        ? ColorParams.fastestColor
+                        : ColorParams.recommendedColor,
+                    onPressed: () => setState(() {
+                      StringParams.locale = StringParams.de;
+                    }),
+                  ),
+                ),
+                ButtonTheme(
+                  minWidth: 300.0,
+                  //height: 35.0,
+                  child: RaisedButton(
+                    child: Text(
+                      "FRANÇAIS",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
+                    color: StringParams.locale["lang"] == "fr"
+                        ? ColorParams.fastestColor
+                        : ColorParams.recommendedColor,
+                    onPressed: () => setState(() {
+                      StringParams.locale = StringParams.fr;
+                    }),
+                  ),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Divider(
+                  color: Colors.grey,
+                ),
                 SizedBox(
                   height: 10.0,
                 ),
@@ -106,90 +192,13 @@ class InfoPageState extends State<InfoPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 20.0,
                 ),
-                Divider(
-                  color: Colors.grey,
-                ),
-                ButtonTheme(
-                  minWidth: 300.0,
-                  //height: 35.0,
-                  child: RaisedButton(
-                    child: Text(
-                      "ENGLISH",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ),
-                    color: StringParams.locale["lang"] == "en"
-                        ? ColorParams.fastestColor
-                        : ColorParams.recommendedColor,
-                    onPressed: () => setState(() {
-                      StringParams.locale = StringParams.en;
-                    }),
-                  ),
-                ),
-                ButtonTheme(
-                  minWidth: 300.0,
-                  //height: 35.0,
-                  child: RaisedButton(
-                    child: Text(
-                      "日本語",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ),
-                    color: StringParams.locale["lang"] == "jp"
-                        ? ColorParams.fastestColor
-                        : ColorParams.recommendedColor,
-                    onPressed: () => setState(() {
-                      StringParams.locale = StringParams.jp;
-                    }),
-                  ),
-                ),
-                ButtonTheme(
-                  minWidth: 300.0,
-                  //height: 35.0,
-                  child: RaisedButton(
-                    child: Text(
-                      "DEUTSCH",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ),
-                    color: StringParams.locale["lang"] == "de"
-                        ? ColorParams.fastestColor
-                        : ColorParams.recommendedColor,
-                    onPressed: () => setState(() {
-                      StringParams.locale = StringParams.de;
-                    }),
-                  ),
-                ),
-                ButtonTheme(
-                  minWidth: 300.0,
-                  //height: 35.0,
-                  child: RaisedButton(
-                    child: Text(
-                      "FRANCAIS",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ),
-                    color: StringParams.locale["lang"] == "fr"
-                        ? ColorParams.fastestColor
-                        : ColorParams.recommendedColor,
-                    onPressed: () => setState(() {
-                      StringParams.locale = StringParams.fr;
-                    }),
-                  ),
-                ),
+
+
               ],
             ),
-          ),
+          //),
         ),
       ),
     );
