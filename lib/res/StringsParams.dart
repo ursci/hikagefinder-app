@@ -10,9 +10,9 @@ class StringParams {
     ///
     "ImfoPage.appbar_title": "について",
     "InfoPage.title": "ヒカゲ・ファインダーとは?",
-    "InfoPage.text": "ヒカゲ・ファインダー では、2つの場所間の最短ルート、最短ルートに近いのに日照量が少ない方のルートを表示してくれます。",
-    "InfoPage.text2":
-    "ヒカゲ・ファインダー は、東京大学がジョーリパブリックと共同で開発したサービスです。\n\n"
+    "InfoPage.text":
+        "ヒカゲ・ファインダー では、2つの場所間の最短ルート、最短ルートに近いのに日照量が少ない方のルートを表示してくれます。",
+    "InfoPage.text2": "ヒカゲ・ファインダー は、東京大学がジョーリパブリックと共同で開発したサービスです。\n\n"
         "ご質問やご意見がございましたら、お気軽にお問い合わせください。",
     "InfoPage.contact": "  contact@hikagefinder.jp",
 
@@ -20,10 +20,11 @@ class StringParams {
     /// MapStartPage
     ///
     "MapStartPage.title": "出発地を選択してください",
-    "MapStartPage.message":
-    "地図を移動して、ルートを開始したい場所にピンをドロップします。",
+    "MapStartPage.message": "地図を移動して、ルートを開始したい場所にピンをドロップします。",
     "MapStartPage.set": "選を問う",
-    "MapStartPage.cancel": "キャンセール",///
+    "MapStartPage.cancel": "キャンセール",
+
+    ///
     /// MapStopPage
     ///
     "MapStopPage.title": "目的地を選択してください",
@@ -35,7 +36,7 @@ class StringParams {
     "MapStopPage.errorDlgMsg": "ルートは見つかりませんでした。",
     "MapStopPage.errorTimeDlgMsg": "朝8時から18時までのみの運行となります。",
     "MapStopPage.errorAreaDlgMsg":
-    "選択されたポイントはサービスエリア外となります。このバージョンは渋谷区限定で動作します。",
+        "選択されたポイントはサービスエリア外となります。このバージョンは渋谷区限定で動作します。",
     "MapStopPage.errorDlgClose": "閉じる",
 
     ///
@@ -53,10 +54,9 @@ class StringParams {
     "RouteResultPage.findRoute": "ルートを検索する",
     "RouteResultPage.errorDlgTitle": "エラー...",
     "RouteResultPage.errorDlgMsg": "旅程は見つかりませんでした。設定を変更して再度お試しください。",
-    "RouteResultPage.errorTimeDlgMsg":
-    "朝8時から18時までのみの運行となります。",
+    "RouteResultPage.errorTimeDlgMsg": "朝8時から18時までのみの運行となります。",
     "RouteResultPage.errorAreaDlgMsg":
-    "選択されたポイントはサービスエリア外となります。このバージョンは渋谷区限定で動作します。",
+        "選択されたポイントはサービスエリア外となります。このバージョンは渋谷区限定で動作します。",
     "RouteResultPage.errorDlgClose": "閉じる",
 
     ///
@@ -65,7 +65,6 @@ class StringParams {
     "SelectedRoutePage.route": "ルート",
     "SelectedRoutePage.return": "戻る",
   };
-
 
   static final Map<String, String> de = {
     ///
@@ -104,7 +103,8 @@ class StringParams {
     "MapStopPage.cancel": "Abbrechen",
     "MapStopPage.findRoute": "Nach einer Route suchen",
     "MapStopPage.errorDlgTitle": "Fehler",
-    "MapStopPage.errorDlgMsg": "Es wurder keine Route gefunden. Versuchen Sie es erneut, indem Sie die Einstellungen ändern.",
+    "MapStopPage.errorDlgMsg":
+        "Es wurder keine Route gefunden. Versuchen Sie es erneut, indem Sie die Einstellungen ändern.",
     "MapStopPage.errorTimeDlgMsg":
         "Dieser Dienst ist nur von 8:00 bis 18:00 verfügbar",
     "MapStopPage.errorAreaDlgMsg":
@@ -125,7 +125,8 @@ class StringParams {
     "RouteResultPage.departure": "Abreise",
     "RouteResultPage.findRoute": "Nach einer Route suchen",
     "RouteResultPage.errorDlgTitle": "Fehler",
-    "RouteResultPage.errorDlgMsg": "Es wurder keine Route gefunden. Versuchen Sie es erneut, indem Sie die Einstellungen ändern.",
+    "RouteResultPage.errorDlgMsg":
+        "Es wurder keine Route gefunden. Versuchen Sie es erneut, indem Sie die Einstellungen ändern.",
     "RouteResultPage.errorTimeDlgMsg":
         "Dieser Dienst ist nur von 8:00 bis 18:00 verfügbar",
     "RouteResultPage.errorAreaDlgMsg":
@@ -173,8 +174,9 @@ class StringParams {
     /// MapStopPage
     ///
     "MapStopPage.title": "Choisir le lieu d'arrivée",
-    "MapStopPage.message": "Déplacez la carte et déposez le pointeur à l'endroit "
-        "où vous souhaitez terminer votre itinéraire.",
+    "MapStopPage.message":
+        "Déplacez la carte et déposez le pointeur à l'endroit "
+            "où vous souhaitez terminer votre itinéraire.",
     "MapStopPage.set": "Sélectionner",
     "MapStopPage.cancel": "Annuler",
     "MapStopPage.findRoute": "Rechercher l'itinéraire",
@@ -199,7 +201,8 @@ class StringParams {
     "RouteResultPage.departure": "Partir",
     "RouteResultPage.findRoute": "Rechercher l'itinéraire",
     "RouteResultPage.errorDlgTitle": "Erreur...",
-    "RouteResultPage.errorDlgMsg": "Aucun itinéraire trouvé. Essayez de nouveau en modifiant les paramètres.",
+    "RouteResultPage.errorDlgMsg":
+        "Aucun itinéraire trouvé. Essayez de nouveau en modifiant les paramètres.",
     "RouteResultPage.errorTimeDlgMsg":
         "Ce service ne fonctionne que de 8h à 18h",
     "RouteResultPage.errorAreaDlgMsg":
@@ -251,7 +254,8 @@ class StringParams {
     "MapStopPage.cancel": "Cancel",
     "MapStopPage.findRoute": "Looking for the route",
     "MapStopPage.errorDlgTitle": "Error",
-    "MapStopPage.errorDlgMsg": "No itinerary found. Try again by changing the parameters.",
+    "MapStopPage.errorDlgMsg":
+        "No itinerary found. Try again by changing the parameters.",
     "MapStopPage.errorTimeDlgMsg":
         "This service is operational only from 8am to 6pm",
     "MapStopPage.errorAreaDlgMsg":
@@ -272,7 +276,8 @@ class StringParams {
     "RouteResultPage.departure": "Departure",
     "RouteResultPage.findRoute": "Looking for the Route",
     "RouteResultPage.errorDlgTitle": "Error",
-    "RouteResultPage.errorDlgMsg": "No itinerary found. Try again by changing the parameters.",
+    "RouteResultPage.errorDlgMsg":
+        "No itinerary found. Try again by changing the parameters.",
     "RouteResultPage.errorTimeDlgMsg":
         "This service is operational only from 8am to 6pm.",
     "RouteResultPage.errorAreaDlgMsg":
@@ -286,5 +291,5 @@ class StringParams {
     "SelectedRoutePage.return": "Return",
   };
 
-  static final Map<String, String> locale = jp ;
+  static Map<String, String> locale = jp;
 }

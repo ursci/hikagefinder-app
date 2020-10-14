@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:hikageapp/res/ColorParams.dart';
 import 'package:hikageapp/res/StringsParams.dart';
 
-class InfoPage extends StatelessWidget {
+class InfoPage extends StatefulWidget {
+  @override
+  InfoPageState createState() => InfoPageState();
+}
+
+class InfoPageState extends State<InfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,14 +29,15 @@ class InfoPage extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: Container(
-          padding: EdgeInsets.all(20.0),
-          width: 350.0,
-          color: Colors.white,
-          child: Center(
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.all(20.0),
+            width: 350.0,
+            color: Colors.white,
+            //child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              //crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
                   height: 10.0,
@@ -73,9 +79,9 @@ class InfoPage extends StatelessWidget {
                   height: 22.0,
                 ),
                 RichText(
-                  text: new TextSpan(
+                  text: TextSpan(
                     children: [
-                      new TextSpan(
+                      TextSpan(
                           text: StringParams.locale["InfoPage.text2"],
                           style: TextStyle(
                             fontFamily: 'Roboto',
@@ -85,7 +91,7 @@ class InfoPage extends StatelessWidget {
                             fontStyle: FontStyle.normal,
                             letterSpacing: 0.1625,
                           )),
-                      new TextSpan(
+                      TextSpan(
                         text: StringParams.locale["InfoPage.contact"],
                         style: TextStyle(
                           fontFamily: 'Roboto',
@@ -97,6 +103,80 @@ class InfoPage extends StatelessWidget {
                         ),
                       ),
                     ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Divider(
+                  color: Colors.grey,
+                ),
+                ButtonTheme(
+                  minWidth: 300.0,
+                  //height: 35.0,
+                  child: RaisedButton(
+                    child: Text(
+                      "ENGLISH",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
+                    color: ColorParams.fastestColor,
+                    onPressed: () => setState(() {
+                      StringParams.locale = StringParams.en;
+                    }),
+                  ),
+                ),
+                ButtonTheme(
+                  minWidth: 300.0,
+                  //height: 35.0,
+                  child: RaisedButton(
+                    child: Text(
+                      "日本語",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
+                    color: ColorParams.recommendedColor,
+                    onPressed: () => setState(() {
+                      StringParams.locale = StringParams.jp;
+                    }),
+                  ),
+                ),
+                ButtonTheme(
+                  minWidth: 300.0,
+                  //height: 35.0,
+                  child: RaisedButton(
+                    child: Text(
+                      "DEUTSCH",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
+                    color: ColorParams.recommendedColor,
+                    onPressed: () => setState(() {
+                      StringParams.locale = StringParams.de;
+                    }),
+                  ),
+                ),
+                ButtonTheme(
+                  minWidth: 300.0,
+                  //height: 35.0,
+                  child: RaisedButton(
+                    child: Text(
+                      "FRANCAIS",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
+                    color: ColorParams.recommendedColor,
+                    onPressed: () => setState(() {
+                      StringParams.locale = StringParams.fr;
+                    }),
                   ),
                 ),
               ],
