@@ -1,5 +1,7 @@
 class StringParams {
   static final Map<String, String> jp = {
+    "lang": "jp",
+
     ///
     /// MainPage
     ///
@@ -67,6 +69,8 @@ class StringParams {
   };
 
   static final Map<String, String> de = {
+    "lang": "de",
+
     ///
     /// MainPage
     ///
@@ -141,6 +145,8 @@ class StringParams {
   };
 
   static final Map<String, String> fr = {
+    "lang": "fr",
+
     ///
     /// MainPage
     ///
@@ -217,6 +223,8 @@ class StringParams {
   };
 
   static final Map<String, String> en = {
+    "lang": "en",
+
     ///
     /// MainPage
     ///

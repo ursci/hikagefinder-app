@@ -122,7 +122,9 @@ class InfoPageState extends State<InfoPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ),
-                    color: ColorParams.fastestColor,
+                    color: StringParams.locale["lang"] == "en"
+                        ? ColorParams.fastestColor
+                        : ColorParams.recommendedColor,
                     onPressed: () => setState(() {
                       StringParams.locale = StringParams.en;
                     }),
@@ -139,7 +141,9 @@ class InfoPageState extends State<InfoPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ),
-                    color: ColorParams.recommendedColor,
+                    color: StringParams.locale["lang"] == "jp"
+                        ? ColorParams.fastestColor
+                        : ColorParams.recommendedColor,
                     onPressed: () => setState(() {
                       StringParams.locale = StringParams.jp;
                     }),
@@ -156,7 +160,9 @@ class InfoPageState extends State<InfoPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ),
-                    color: ColorParams.recommendedColor,
+                    color: StringParams.locale["lang"] == "de"
+                        ? ColorParams.fastestColor
+                        : ColorParams.recommendedColor,
                     onPressed: () => setState(() {
                       StringParams.locale = StringParams.de;
                     }),
@@ -173,7 +179,9 @@ class InfoPageState extends State<InfoPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ),
-                    color: ColorParams.recommendedColor,
+                    color: StringParams.locale["lang"] == "fr"
+                        ? ColorParams.fastestColor
+                        : ColorParams.recommendedColor,
                     onPressed: () => setState(() {
                       StringParams.locale = StringParams.fr;
                     }),
