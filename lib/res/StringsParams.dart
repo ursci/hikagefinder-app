@@ -28,7 +28,7 @@ class StringParams {
     ///
     "MapStopPage.title": "目的地を選択してください",
     "MapStopPage.message": "地図を移動して、到着したい場所にピンを配置します。",
-    "MapStopPage.set": "選を問う",
+    "MapStopPage.set": "ルート検索",
     "MapStopPage.cancel": "キャンセール",
     "MapStopPage.findRoute": "現在のルートを探す...",
     "MapStopPage.errorDlgTitle": "エラー...",
@@ -286,5 +286,5 @@ class StringParams {
     "SelectedRoutePage.return": "Return",
   };
 
-  static final Map<String, String> locale = en;
+  static final Map<String, String> locale = jp ;
 }

@@ -410,17 +410,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                         SizedBox(
                           width: 10.0,
                         ),
-                        Text(
-                          "${_shortSunLight.toStringAsFixed(0)}%",
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            color: Color(0xff6c6c6c),
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            fontStyle: FontStyle.normal,
-                            letterSpacing: 0.1625,),
-                        ),
-                        Text("${StringParams.locale["RouteResultPage.sunlight"]}, ${_shortTime.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.minutes"]}, ${_shortDist.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.meters"]}",
+                        Text("${_shortSunLight.toStringAsFixed(0)}% ${StringParams.locale["RouteResultPage.sunlight"]}, ${_shortTime.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.minutes"]}, ${_shortDist.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.meters"]}",
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             color: Color(0xff6c6c6c),
