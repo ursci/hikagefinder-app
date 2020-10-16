@@ -24,7 +24,7 @@ class StringParams {
     "MapStartPage.title": "出発地を選択してください",
     "MapStartPage.message": "地図を移動して、ルートを開始したい場所にピンをドロップします。",
     "MapStartPage.set": "選を問う",
-    "MapStartPage.cancel": "キャンセール",
+    "MapStartPage.cancel": "キャンセル",
 
     ///
     /// MapStopPage
@@ -32,7 +32,7 @@ class StringParams {
     "MapStopPage.title": "目的地を選択してください",
     "MapStopPage.message": "地図を移動して、到着したい場所にピンを配置します。",
     "MapStopPage.set": "ルート検索",
-    "MapStopPage.cancel": "キャンセール",
+    "MapStopPage.cancel": "キャンセル",
     "MapStopPage.findRoute": "現在のルートを探す...",
     "MapStopPage.errorDlgTitle": "エラー...",
     "MapStopPage.errorDlgMsg": "ルートは見つかりませんでした。",
@@ -66,6 +66,12 @@ class StringParams {
     ///
     "SelectedRoutePage.route": "ルート",
     "SelectedRoutePage.return": "戻る",
+
+    ///
+    /// TimePicker Widget
+    ///
+    "TimePicker.ok": "設定",
+    "TimePicker.cancel": "キャンセル"
   };
 
   static final Map<String, String> de = {
@@ -142,6 +148,12 @@ class StringParams {
     ///
     "SelectedRoutePage.route": "Route",
     "SelectedRoutePage.return": "Zurück",
+
+    ///
+    /// TimePicker Widget
+    ///
+    "TimePicker.ok": "Set",
+    "TimePicker.cancel": "Cancel",
   };
 
   static final Map<String, String> fr = {
@@ -220,6 +232,12 @@ class StringParams {
     ///
     "SelectedRoutePage.route": "Route",
     "SelectedRoutePage.return": "Retour",
+
+    ///
+    /// TimePicker Widget
+    ///
+    "TimePicker.ok": "Set",
+    "TimePicker.cancel": "Cancel",
   };
 
   static final Map<String, String> en = {
@@ -297,6 +315,12 @@ class StringParams {
     ///
     "SelectedRoutePage.route": "Route",
     "SelectedRoutePage.return": "Return",
+
+    ///
+    /// TimePicker Widget
+    ///
+    "TimePicker.ok": "Set",
+    "TimePicker.cancel": "Cancel",
   };
 
   static Map<String, String> locale = jp;

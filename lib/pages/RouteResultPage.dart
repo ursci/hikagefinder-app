@@ -118,13 +118,20 @@ class RouteResultPageState extends State<RouteResultPage> {
   }
 
   drawRoute(bool shortestFirst) {
-    _recoSunLight = (_recommendedGeoJson.features[0].properties["sunlight_rate"] * 100).roundToDouble();
+    _recoSunLight =
+        (_recommendedGeoJson.features[0].properties["sunlight_rate"] * 100)
+            .roundToDouble();
     _shortSunLight =
-        (_shortestGeoJson.features[0].properties["sunlight_rate"] * 100).roundToDouble();
-    _recoTime = (_recommendedGeoJson.features[0].properties["total_minutes"] ).round();
-    _shortTime = (_shortestGeoJson.features[0].properties["total_minutes"] ).round();
-    _recoDist = (_recommendedGeoJson.features[0].properties["total_distance"] ).round();
-    _shortDist = (_shortestGeoJson.features[0].properties["total_distance"] ).round();
+        (_shortestGeoJson.features[0].properties["sunlight_rate"] * 100)
+            .roundToDouble();
+    _recoTime =
+        (_recommendedGeoJson.features[0].properties["total_minutes"]).round();
+    _shortTime =
+        (_shortestGeoJson.features[0].properties["total_minutes"]).round();
+    _recoDist =
+        (_recommendedGeoJson.features[0].properties["total_distance"]).round();
+    _shortDist =
+        (_shortestGeoJson.features[0].properties["total_distance"]).round();
 
     _polyLines.clear();
 
@@ -262,7 +269,8 @@ class RouteResultPageState extends State<RouteResultPage> {
                 showTimePicker(
                   context: context,
                   initialTime: TimeOfDay.now(),
-                  confirmText: "SET",
+                  confirmText: StringParams.locale["TimePicker.ok"],
+                  cancelText: StringParams.locale["TimePicker.cancel"],
                 ).then((timeOfDay) async {
                   if (timeOfDay != null) {
                     await findRoute(timeOfDay);
@@ -344,9 +352,11 @@ class RouteResultPageState extends State<RouteResultPage> {
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.normal,
-                            letterSpacing: 0.1625,),
+                            letterSpacing: 0.1625,
+                          ),
                         ),
-                        Text("${StringParams.locale["RouteResultPage.sunlight"]}, ${_recoTime.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.minutes"]}, ${_recoDist.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.meters"]}",
+                        Text(
+                          "${StringParams.locale["RouteResultPage.sunlight"]}, ${_recoTime.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.minutes"]}, ${_recoDist.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.meters"]}",
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             color: Color(0xff6c6c6c),
@@ -410,7 +420,8 @@ class RouteResultPageState extends State<RouteResultPage> {
                         SizedBox(
                           width: 10.0,
                         ),
-                        Text("${_shortSunLight.toStringAsFixed(0)}% ${StringParams.locale["RouteResultPage.sunlight"]}, ${_shortTime.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.minutes"]}, ${_shortDist.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.meters"]}",
+                        Text(
+                          "${_shortSunLight.toStringAsFixed(0)}% ${StringParams.locale["RouteResultPage.sunlight"]}, ${_shortTime.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.minutes"]}, ${_shortDist.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.meters"]}",
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             color: Color(0xff6c6c6c),
