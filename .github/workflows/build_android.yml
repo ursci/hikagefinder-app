@@ -1,7 +1,12 @@
-#on: 
-#  push: 
+name: Build for Android
+
+on:
+  push:
+    branches: [ master ]
 #    tags: 
 #      - v*
+  pull_request:
+    branches: [ master, ftr* ]
 
 jobs: 
   build-and-test: 
