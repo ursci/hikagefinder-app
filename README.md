@@ -1,6 +1,6 @@
-# hikageapp
+# Hikage Finder mobile app
 
-Shade Route Finder for Tokyo University
+Mobile app of the "Hikage Finder" project.
 
 ## Getting Started
 
