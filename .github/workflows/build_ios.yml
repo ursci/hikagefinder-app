@@ -4,8 +4,6 @@ on:
   push:
     tags: 
       - v*
-    branches:
-      - 'ftr/**'
 
 jobs: 
   build: 
@@ -20,3 +18,8 @@ jobs:
           channel: 'stable'
       - run: flutter pub get
       - run: flutter build ios --release --no-codesign
+      - uses: ncipollo/release-action@v1
+        with:
+          # /Users/runner/work/hikagefinder-app/hikagefinder-app/build/ios/iphoneos/Runner.app
+          artifacts: "/Users/runner/work/hikagefinder-app/hikagefinder-app/build/ios/iphoneos/*.app"
+          token: ${{ secrets.GITHUB_TOKEN }}

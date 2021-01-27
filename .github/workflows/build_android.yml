@@ -4,8 +4,6 @@ on:
   push:
     tags: 
       - v*
-    branches:
-      - 'ftr/**'
 
 jobs: 
   build: 
@@ -20,4 +18,8 @@ jobs:
           channel: 'stable'
       - run: flutter pub get
       - run: flutter build apk --split-per-abi
-      
+      - uses: ncipollo/release-action@v1
+        with:
+          # build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+          artifacts: "build/app/outputs/apk/**/*.apk"
+          token: ${{ secrets.GITHUB_TOKEN }}
