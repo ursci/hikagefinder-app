@@ -37,10 +37,10 @@ jobs:
     - uses: actions/upload-artifact@v1
       with:
         name: release-apk
-        path: build/app/outputs/**/*.apk
+        path: build/app/outputs/flutter-apk/*.apk
 
     # Upload generated appbundle to the artifacts.
     - uses: actions/upload-artifact@v1
       with:
         name: release-aab
-        path: build/app/outputs/**/*.aab
+        path: build/app/outputs/bundle/release/*.aab

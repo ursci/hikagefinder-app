@@ -27,11 +27,11 @@ jobs:
     - name: Install dependencies
       run: flutter pub get  
 
-    - name: Build apk
+    - name: Build ios
       run: flutter build ios --release --no-codesign
 
     # Upload generated app to the artifacts.
     - uses: actions/upload-artifact@v1
       with:
-        # name: release-app
-        path: /Users/runner/work/hikagefinder-app/hikagefinder-app/build/ios/iphoneos/
+        name: release-app
+        path: build/ios/iphoneos/*.app
