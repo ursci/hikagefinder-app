@@ -22,4 +22,5 @@ jobs:
         with:
           # /Users/runner/work/hikagefinder-app/hikagefinder-app/build/ios/iphoneos/Runner.app
           artifacts: "/Users/runner/work/hikagefinder-app/hikagefinder-app/build/ios/iphoneos/*.app"
+          allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}

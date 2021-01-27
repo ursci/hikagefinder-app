@@ -22,4 +22,5 @@ jobs:
         with:
           # build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
           artifacts: "build/app/outputs/apk/**/*.apk"
+          allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
