@@ -34,4 +34,4 @@ jobs:
     - uses: actions/upload-artifact@v1
       with:
         name: release-app
-        path: build/ios/iphoneos/*.app
+        path: '/Users/runner/work/hikagefinder-app/hikagefinder-app/build/ios/iphoneos/*'
