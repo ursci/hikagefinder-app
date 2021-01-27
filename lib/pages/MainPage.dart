@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:hikageapp/pages/InfoPage.dart';
 import 'package:hikageapp/pages/MapStartPage.dart';
+import 'package:hikageapp/res/ColorParams.dart';
+import 'package:hikageapp/res/StringsParams.dart';
+import 'package:hikageapp/utils/LocationUtils.dart';
 import 'package:hikageapp/utils/MapTileUtils.dart';
 import 'package:latlong/latlong.dart';
+import 'package:location/location.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -16,10 +20,23 @@ class MainPageState extends State<MainPage> {
   List<Polyline> _polyLines = List<Polyline>();
 
   LatLng _initialPoint = LatLng(35.6592979, 139.7005656);
+  LocationUtils _locationUtils = LocationUtils();
 
   @override
   void initState() {
     super.initState();
+    centerMarker();
+  }
+
+  getPresentPos() async {
+    LocationData ld = await _locationUtils.getPresentPos();
+    _initialPoint = LatLng(ld.latitude, ld.longitude);
+    centerMarker();
+  }
+
+  centerMarker() {
+    _markers.clear();
+
     _markers.add(
       Marker(
         point: _initialPoint,
@@ -93,7 +110,7 @@ class MainPageState extends State<MainPage> {
                         onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => InfoPage()),
-                        ),
+                        ).then((value) => setState(() {})),
                       ),
                     ),
                   ),
@@ -109,7 +126,8 @@ class MainPageState extends State<MainPage> {
                             color: Colors.blue[900],
                             size: 38.0,
                           ),
-                          onPressed: () {
+                          onPressed: () async {
+                            await getPresentPos();
                             _mapController.move(
                                 _initialPoint, _mapController.zoom);
                           }),
@@ -127,9 +145,9 @@ class MainPageState extends State<MainPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ),
-                    color: Colors.blue[900],
+                    color: ColorParams.recommendedColor,
                     child: Text(
-                      "Start",
+                      StringParams.locale["MainPage.start"],
                       style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                     onPressed: () => Navigator.push(

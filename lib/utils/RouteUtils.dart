@@ -9,9 +9,11 @@ import 'package:latlong/latlong.dart';
 class RouteUtils {
   GeoJson _recommendedGeoJson = GeoJson();
   GeoJson _shortestGeoJson = GeoJson();
+  int _errorCode = 1; // 1=Normal Error, 2=Service Time, 3=Service Area
 
   GeoJson get recommendedGeoJson => _recommendedGeoJson;
   GeoJson get shortestGeoJson => _shortestGeoJson;
+  int get errorCode => _errorCode;
 
   Future<bool> findRoute(LatLng startPos, LatLng stopPos,
       {DateTime dateParam}) async {
@@ -43,8 +45,9 @@ class RouteUtils {
     NetworkResult retVal = await restUtil.registerData(
         jsonEncoder.convert(dataReq), null, RestParams.baseUrl);
 
+    Map<String, dynamic> result = retVal.responseBody;
+
     if (retVal != null && retVal.response == "OK") {
-      Map<String, dynamic> result = retVal.responseBody;
       GeoJson sGeoJson = GeoJson();
       GeoJson rGeoJson = GeoJson();
 
@@ -60,6 +63,15 @@ class RouteUtils {
       _recommendedGeoJson = rGeoJson;
 
       return true;
+    }
+
+    String errorStr = result["detail"].toString().toUpperCase();
+    //result["detail"][0]["msg"].toString().toUpperCase();
+
+    if (errorStr.contains("SERVICE TIME")) {
+      _errorCode = 2;
+    } else if (errorStr.contains("SERVICE AREA")) {
+      _errorCode = 3;
     }
 
     return false;

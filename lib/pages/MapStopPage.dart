@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:hikageapp/pages/RouteResultPage.dart';
+import 'package:hikageapp/res/ColorParams.dart';
+import 'package:hikageapp/res/StringsParams.dart';
 import 'package:hikageapp/utils/DialogUtil.dart';
+import 'package:hikageapp/utils/LocationUtils.dart';
 import 'package:hikageapp/utils/MapTileUtils.dart';
 import 'package:hikageapp/utils/RouteUtils.dart';
 import 'package:latlong/latlong.dart';
+import 'package:location/location.dart';
 
 class MapStopPage extends StatefulWidget {
   final LatLng startPos;
@@ -21,6 +25,7 @@ class MapStopPageState extends State<MapStopPage> {
   List<Polyline> _polyLines = List<Polyline>();
 
   LatLng _initialPoint = LatLng(35.6592979, 139.7005656);
+  LocationUtils _locationUtils = LocationUtils();
 
   @override
   void initState() {
@@ -56,7 +61,7 @@ class MapStopPageState extends State<MapStopPage> {
 
     _polyLines.add(Polyline(
       color: Colors.grey,
-      points: [pos.center, _initialPoint],
+      points: [pos.center, widget.startPos],
       strokeWidth: 6.0,
       isDotted: true,
     ));
@@ -76,13 +81,26 @@ class MapStopPageState extends State<MapStopPage> {
     );
   }
 
-  showErrorMsg() {
-    DialogUtil.showCustomDialog(context, "Error", "No Route Found", "Close",
+  showErrorMsg(int res) {
+    String errMsg = StringParams.locale["MapStopPage.errorDlgMsg"];
+
+    if (res == 2) {
+      errMsg = StringParams.locale["MapStopPage.errorTimeDlgMsg"];
+    } else if (res == 3) {
+      errMsg = StringParams.locale["MapStopPage.errorAreaDlgMsg"];
+    }
+
+    DialogUtil.showCustomDialog(
+        context,
+        StringParams.locale["MapStopPage.errorDlgTitle"],
+        errMsg,
+        StringParams.locale["MapStopPage.errorDlgClose"],
         titleColor: Colors.red);
   }
 
   findRoute() async {
-    DialogUtil.showOnSendDialog(context, "Looking For the Route");
+    DialogUtil.showOnSendDialog(
+        context, StringParams.locale["MapStopPage.findRoute"]);
 
     RouteUtils routeUtils = RouteUtils();
 
@@ -92,8 +110,8 @@ class MapStopPageState extends State<MapStopPage> {
     Navigator.pop(context);
 
     if (!result) {
-      /// No Features
-      showErrorMsg();
+      /// No Features or other error
+      showErrorMsg(routeUtils.errorCode);
       return;
     }
 
@@ -101,12 +119,17 @@ class MapStopPageState extends State<MapStopPage> {
       context,
       MaterialPageRoute(
         builder: (context) => RouteResultPage(
-            _initialPoint,
+            widget.startPos,
             _mapController.center,
             routeUtils.shortestGeoJson,
             routeUtils.recommendedGeoJson),
       ),
     );
+  }
+
+  getPresentPos() async {
+    LocationData ld = await _locationUtils.getPresentPos();
+    _initialPoint = LatLng(ld.latitude, ld.longitude);
   }
 
   @override
@@ -159,7 +182,8 @@ class MapStopPageState extends State<MapStopPage> {
                             color: Colors.blue[900],
                             size: 38.0,
                           ),
-                          onPressed: () {
+                          onPressed: () async {
+                            await getPresentPos();
                             _mapController.move(
                                 _initialPoint, _mapController.zoom);
                           }),
@@ -176,7 +200,7 @@ class MapStopPageState extends State<MapStopPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      "Pick your destination",
+                      StringParams.locale["MapStopPage.title"],
                       textAlign: TextAlign.start,
                       style: TextStyle(
                         fontFamily: 'Roboto',
@@ -187,8 +211,11 @@ class MapStopPageState extends State<MapStopPage> {
                         letterSpacing: 2,
                       ),
                     ),
+                    SizedBox(
+                      height: 9.0,
+                    ),
                     Text(
-                      "Move the map and drop the pin at the location where you want to start your route.",
+                      StringParams.locale["MapStopPage.message"],
                       style: TextStyle(
                         fontFamily: 'Roboto',
                         color: Color(0xff6c6c6c),
@@ -208,9 +235,9 @@ class MapStopPageState extends State<MapStopPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
                           ),
-                          color: Colors.blue[900],
+                          color: ColorParams.recommendedColor,
                           child: Text(
-                            "Set",
+                            StringParams.locale["MapStopPage.set"],
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                           onPressed: () => findRoute(),
@@ -225,7 +252,7 @@ class MapStopPageState extends State<MapStopPage> {
                             borderRadius: BorderRadius.circular(18.0),
                           ),
                           child: Text(
-                            "Cancel",
+                            StringParams.locale["MapStopPage.cancel"],
                             style: TextStyle(
                                 fontSize: 16, color: Colors.blue[900]),
                           ),

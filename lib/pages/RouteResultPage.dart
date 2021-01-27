@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geojson/geojson.dart';
+import 'package:hikageapp/pages/SelectedRoutePage.dart';
+import 'package:hikageapp/res/ColorParams.dart';
+import 'package:hikageapp/res/StringsParams.dart';
 import 'package:hikageapp/utils/DialogUtil.dart';
+import 'package:hikageapp/utils/LocationUtils.dart';
 import 'package:hikageapp/utils/MapTileUtils.dart';
 import 'package:hikageapp/utils/RouteUtils.dart';
 import 'package:latlong/latlong.dart';
+import 'package:location/location.dart';
 
 class RouteResultPage extends StatefulWidget {
   final LatLng startPos;
@@ -27,10 +32,16 @@ class RouteResultPageState extends State<RouteResultPage> {
   GeoJson _shortestGeoJson;
   double _recoSunLight;
   double _shortSunLight;
+  int _recoTime;
+  int _shortTime;
+  int _recoDist;
+  int _shortDist;
 
   LatLng _initialPoint = LatLng(35.6592979, 139.7005656);
 
-  String _timeChosen = "Now";
+  String _timeChosen = StringParams.locale["RouteResultPage.now"];
+
+  LocationUtils _locationUtils = LocationUtils();
 
   @override
   void initState() {
@@ -81,17 +92,52 @@ class RouteResultPageState extends State<RouteResultPage> {
     drawRoute(false);
   }
 
+  drawGpsPos(LatLng pos) {
+    if (_markers.length > 2) {
+      _markers.removeAt(2);
+    }
+
+    _markers.add(
+      Marker(
+        point: pos,
+        height: 49.0,
+        width: 49.0,
+        anchorPos: AnchorPos.exactly(Anchor(18.0, 18.0)),
+        builder: (ctx) => Container(
+          child: FlatButton(
+            onPressed: () => {},
+            child: Icon(
+              Icons.my_location,
+              size: 35.0,
+              color: Colors.blue[900],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   drawRoute(bool shortestFirst) {
     _recoSunLight =
-        _recommendedGeoJson.features[0].properties["sunlight_rate"] * 100;
+        (_recommendedGeoJson.features[0].properties["sunlight_rate"] * 100)
+            .roundToDouble();
     _shortSunLight =
-        _shortestGeoJson.features[0].properties["sunlight_rate"] * 100;
+        (_shortestGeoJson.features[0].properties["sunlight_rate"] * 100)
+            .roundToDouble();
+    _recoTime =
+        (_recommendedGeoJson.features[0].properties["total_minutes"]).round();
+    _shortTime =
+        (_shortestGeoJson.features[0].properties["total_minutes"]).round();
+    _recoDist =
+        (_recommendedGeoJson.features[0].properties["total_distance"]).round();
+    _shortDist =
+        (_shortestGeoJson.features[0].properties["total_distance"]).round();
 
     _polyLines.clear();
 
     if (shortestFirst) {
       _polyLines.add(Polyline(
-        color: Colors.blue[900],
+        color: ColorParams.recommendedColor,
         points: _recommendedGeoJson.lines[0].geoSerie
             .toLatLng(), //[widget.startPos, widget.stopPos],
         strokeWidth: 6.0,
@@ -99,7 +145,7 @@ class RouteResultPageState extends State<RouteResultPage> {
       ));
 
       _polyLines.add(Polyline(
-        color: Colors.blue,
+        color: ColorParams.fastestColor,
         points: _shortestGeoJson.lines[0].geoSerie
             .toLatLng(), //[widget.startPos, widget.stopPos],
         strokeWidth: 6.0,
@@ -107,7 +153,7 @@ class RouteResultPageState extends State<RouteResultPage> {
       ));
     } else {
       _polyLines.add(Polyline(
-        color: Colors.blue,
+        color: ColorParams.fastestColor,
         points: _shortestGeoJson.lines[0].geoSerie
             .toLatLng(), //[widget.startPos, widget.stopPos],
         strokeWidth: 6.0,
@@ -115,7 +161,7 @@ class RouteResultPageState extends State<RouteResultPage> {
       ));
 
       _polyLines.add(Polyline(
-        color: Colors.blue[900],
+        color: ColorParams.recommendedColor,
         points: _recommendedGeoJson.lines[0].geoSerie
             .toLatLng(), //[widget.startPos, widget.stopPos],
         strokeWidth: 6.0,
@@ -138,7 +184,8 @@ class RouteResultPageState extends State<RouteResultPage> {
     DateTime rNow = DateTime(
         now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
 
-    DialogUtil.showOnSendDialog(context, "Looking For the Route");
+    DialogUtil.showOnSendDialog(
+        context, StringParams.locale["RouteResultPage.findRoute"]);
 
     bool result = await routeUtils.findRoute(widget.startPos, widget.stopPos,
         dateParam: rNow);
@@ -154,13 +201,37 @@ class RouteResultPageState extends State<RouteResultPage> {
         drawRoute(false);
       });
     } else {
-      DialogUtil.showCustomDialog(context, "Error", "No Route Found", "Close",
+      String errMsg = StringParams.locale["RouteResultPage.errorDlgMsg"];
+      int res = routeUtils.errorCode;
+
+      if (res == 2) {
+        errMsg = StringParams.locale["RouteResultPage.errorTimeDlgMsg"];
+      } else if (res == 3) {
+        errMsg = StringParams.locale["RouteResultPage.errorAreaDlgMsg"];
+      }
+
+      DialogUtil.showCustomDialog(
+          context,
+          StringParams.locale["RouteResultPage.errorDlgTitle"],
+          errMsg,
+          StringParams.locale["RouteResultPage.errorDlgClose"],
           titleColor: Colors.red);
     }
   }
 
+  getPresentPos() async {
+    LocationData ld = await _locationUtils.getPresentPos();
+    _initialPoint = LatLng(ld.latitude, ld.longitude);
+  }
+
   @override
   Widget build(BuildContext context) {
+    List<Polyline> fastestRoute = List<Polyline>();
+    List<Polyline> recommendedRoute = List<Polyline>();
+
+    fastestRoute.add(_polyLines[0]);
+    recommendedRoute.add(_polyLines[1]);
+
     Widget flutterMap = FlutterMap(
       options: MapOptions(
         center: _initialPoint,
@@ -186,7 +257,7 @@ class RouteResultPageState extends State<RouteResultPage> {
           color: Color(0xff777777),
         ),
         title: Text(
-          "Departure: $_timeChosen",
+          "${StringParams.locale["RouteResultPage.departure"]}: $_timeChosen",
           style: TextStyle(
             color: Color(0xff777777),
           ),
@@ -198,6 +269,8 @@ class RouteResultPageState extends State<RouteResultPage> {
                 showTimePicker(
                   context: context,
                   initialTime: TimeOfDay.now(),
+                  confirmText: StringParams.locale["TimePicker.ok"],
+                  cancelText: StringParams.locale["TimePicker.cancel"],
                 ).then((timeOfDay) async {
                   if (timeOfDay != null) {
                     await findRoute(timeOfDay);
@@ -206,7 +279,7 @@ class RouteResultPageState extends State<RouteResultPage> {
                 });
               },
               icon: Icon(
-                Icons.search,
+                Icons.access_time,
                 color: Colors.black, //Color(0xff777777),
               ))
         ],
@@ -231,7 +304,9 @@ class RouteResultPageState extends State<RouteResultPage> {
                             color: Colors.blue[900],
                             size: 38.0,
                           ),
-                          onPressed: () {
+                          onPressed: () async {
+                            await getPresentPos();
+                            drawGpsPos(_initialPoint);
                             _mapController.move(
                                 _initialPoint, _mapController.zoom);
                           }),
@@ -242,113 +317,151 @@ class RouteResultPageState extends State<RouteResultPage> {
             ),
             Expanded(
               flex: 2,
-              child: Container(
-                padding: EdgeInsets.only(left: 24.0, right: 24.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "RECOMMENDED",
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          color: Colors.blue[900],
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.normal,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(Icons.wb_sunny),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          Text(
-                            "${_recoSunLight.toStringAsFixed(2)}% Sunlight",
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              color: Color(0xff6c6c6c),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                              letterSpacing: 0.1625,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      RaisedButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18.0),
-                        ),
+              child: SingleChildScrollView(
+                padding: EdgeInsets.only(top: 18.0, left: 24.0, right: 24.0),
+                // child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      StringParams.locale["RouteResultPage.recommended"],
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
                         color: Colors.blue[900],
-                        child: Text(
-                          "Use Recommended Route",
-                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.normal,
+                        letterSpacing: 2,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(Icons.wb_sunny),
+                        SizedBox(
+                          width: 10.0,
                         ),
-                        onPressed: () => setState(() => drawRoute(false)),
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      Text(
-                        "FASTEST",
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          color: Colors.blue,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.normal,
-                          letterSpacing: 2,
+                        Text(
+                          "${_recoSunLight.toStringAsFixed(0)}%",
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            color: Color(0xff6c6c6c),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: 0.1625,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(Icons.wb_sunny),
-                          SizedBox(
-                            width: 10.0,
+                        Text(
+                          "${StringParams.locale["RouteResultPage.sunlight"]}, ${_recoTime.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.minutes"]}, ${_recoDist.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.meters"]}",
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            color: Color(0xff6c6c6c),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: 0.1625,
                           ),
-                          Text(
-                            "${_shortSunLight.toStringAsFixed(2)}% Sunlight",
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              color: Color(0xff6c6c6c),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                              letterSpacing: 0.1625,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      RaisedButton(
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: RaisedButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
                         ),
-                        color: Colors.blue,
+                        color: ColorParams.recommendedColor,
                         child: Text(
-                          "Use Fastest Route",
+                          StringParams.locale["RouteResultPage.useRecommended"],
                           style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
-                        onPressed: () => setState(() => drawRoute(true)),
-                      )
-                    ],
-                  ),
+                        //onPressed: () => setState(() => drawRoute(false)),
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SelectedRoutePage(
+                              recommendedRoute,
+                              _markers,
+                              StringParams
+                                  .locale["RouteResultPage.recommended"],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Text(
+                      StringParams.locale["RouteResultPage.fastest"],
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        color: ColorParams.fastestColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.normal,
+                        letterSpacing: 2,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(Icons.wb_sunny),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Text(
+                          "${_shortSunLight.toStringAsFixed(0)}% ${StringParams.locale["RouteResultPage.sunlight"]}, ${_shortTime.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.minutes"]}, ${_shortDist.toStringAsFixed(0)}${StringParams.locale["RouteResultPage.meters"]}",
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            color: Color(0xff6c6c6c),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.normal,
+                            letterSpacing: 0.1625,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                        ),
+                        color: ColorParams.fastestColor,
+                        child: Text(
+                          StringParams.locale["RouteResultPage.useFastest"],
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                        //onPressed: () => setState(() => drawRoute(true)),
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SelectedRoutePage(
+                              fastestRoute,
+                              _markers,
+                              StringParams.locale["RouteResultPage.fastest"],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                  // ),
                 ),
               ),
             ),

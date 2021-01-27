@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/plugin_api.dart';
 import 'package:hikageapp/pages/MapStopPage.dart';
+import 'package:hikageapp/res/ColorParams.dart';
+import 'package:hikageapp/res/StringsParams.dart';
+import 'package:hikageapp/utils/LocationUtils.dart';
 import 'package:hikageapp/utils/MapTileUtils.dart';
 import 'package:latlong/latlong.dart';
+import 'package:location/location.dart';
 
 class MapStartPage extends StatefulWidget {
   @override
@@ -17,6 +21,8 @@ class MapStartPageState extends State<MapStartPage> {
 
   LatLng _initialPoint = LatLng(35.6592979, 139.7005656);
   LatLng _presentPoint;
+
+  LocationUtils _locationUtils = LocationUtils();
 
   @override
   void initState() {
@@ -36,6 +42,11 @@ class MapStartPageState extends State<MapStartPage> {
         ),
       ),
     );
+  }
+
+  getPresentPos() async {
+    LocationData ld = await _locationUtils.getPresentPos();
+    _initialPoint = LatLng(ld.latitude, ld.longitude);
   }
 
   void centerMarker(MapPosition pos) {
@@ -111,7 +122,8 @@ class MapStartPageState extends State<MapStartPage> {
                             color: Colors.blue[900],
                             size: 38.0,
                           ),
-                          onPressed: () {
+                          onPressed: () async {
+                            await getPresentPos();
                             _mapController.move(
                                 _initialPoint, _mapController.zoom);
                           }),
@@ -128,7 +140,7 @@ class MapStartPageState extends State<MapStartPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      "Pick your origin",
+                      StringParams.locale["MapStartPage.title"],
                       textAlign: TextAlign.start,
                       style: TextStyle(
                         fontFamily: 'Roboto',
@@ -139,8 +151,11 @@ class MapStartPageState extends State<MapStartPage> {
                         letterSpacing: 2,
                       ),
                     ),
+                    SizedBox(
+                      height: 9.0,
+                    ),
                     Text(
-                      "Move the map and drop the pin at the location where you want to start your route.",
+                      StringParams.locale["MapStartPage.message"],
                       style: TextStyle(
                         fontFamily: 'Roboto',
                         color: Color(0xff6c6c6c),
@@ -160,9 +175,9 @@ class MapStartPageState extends State<MapStartPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
                           ),
-                          color: Colors.blue[900],
+                          color: ColorParams.recommendedColor,
                           child: Text(
-                            "Set",
+                            StringParams.locale["MapStartPage.set"],
                             style: TextStyle(fontSize: 16, color: Colors.white),
                           ),
                           onPressed: () => Navigator.push(
@@ -184,7 +199,7 @@ class MapStartPageState extends State<MapStartPage> {
                             borderRadius: BorderRadius.circular(18.0),
                           ),
                           child: Text(
-                            "Cancel",
+                            StringParams.locale["MapStartPage.cancel"],
                             style: TextStyle(
                                 fontSize: 16, color: Colors.blue[900]),
                           ),
