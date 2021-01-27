@@ -2,11 +2,14 @@ name: Build for Android
 
 on:
   push:
-    branches: [ master ]
+    branches: 
+      - master 
+      - main
+      - 'ftr/**'
 #    tags: 
 #      - v*
-  pull_request:
-    branches: [ master, ftr* ]
+  # pull_request:
+  #   branches: [ master, ftr* ]
 
 jobs: 
   build-and-test: 
