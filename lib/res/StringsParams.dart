@@ -16,7 +16,7 @@ class StringParams {
         "ヒカゲ・ファインダー では、2つの場所間の最短ルート、最短ルートに近いのに日照量が少ない方のルートを表示してくれます。",
     "InfoPage.text2": "ヒカゲ・ファインダー は、東京大学がジョーリパブリックと共同で開発したサービスです。\n\n"
         "ご質問やご意見がございましたら、お気軽にお問い合わせください。",
-    "InfoPage.contact": "  contact@hikagefinder.jp",
+    "InfoPage.contact": "  hikagefinder-ask@urbansciences.jp",
 
     ///
     /// MapStartPage
@@ -92,7 +92,7 @@ class StringParams {
     "InfoPage.text2":
         "Der Hikage Finder wurde von der Universität Tokio in Zusammenarbeit mit dem Unternehmen Georepublic Japan entwickelt.\n\n"
             "Für Fragen und Feedback stehen wir Ihnen gerne zur Verfügung.",
-    "InfoPage.contact": "  contact@hikagefinder.jp",
+    "InfoPage.contact": "  hikagefinder-ask@urbansciences.jp",
 
     ///
     /// MapStartPage
@@ -176,7 +176,7 @@ class StringParams {
         "Hikage Finder est un service développé par l'Université de Tokyo "
             "en collaboration avec Georepublic Japan.\n\n"
             "Pour toutes questions ou commentaires, n'hésitez pas à nous contacter",
-    "InfoPage.contact": "  contact@hikagefinder.jp",
+    "InfoPage.contact": "  hikagefinder-ask@urbansciences.jp",
 
     ///
     /// MapStartPage
@@ -259,7 +259,7 @@ class StringParams {
     "InfoPage.text2": "Hikage Finder is developed by the University of "
         "Tokyo in corporation with Georepublic Japan.\n\n"
         "For questions and feedback feel free to contact us at",
-    "InfoPage.contact": "  contact@hikagefinder.jp",
+    "InfoPage.contact": "  hikagefinder-ask@urbansciences.jp",
 
     ///
     /// MapStartPage
