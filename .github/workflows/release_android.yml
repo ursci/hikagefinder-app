@@ -33,7 +33,7 @@ jobs:
     # Upload generated appbundle to the artifacts.
     - uses: ncipollo/release-action@v1
       with:
-        artifacts: "build/app/outputs/flutter-apk/*.apk"
+        artifacts: "build/app/outputs/flutter-apk/*-release.apk"
         replacesArtifacts: true
         allowUpdates: true
         token: ${{ secrets.GITHUB_TOKEN }}
