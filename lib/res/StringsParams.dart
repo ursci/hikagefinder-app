@@ -10,11 +10,11 @@ class StringParams {
     ///
     /// InfoPage
     ///
-    "ImfoPage.appbar_title": "について",
-    "InfoPage.title": "ヒカゲ・ファインダーとは?",
-    "InfoPage.text":
-        "ヒカゲ・ファインダー では、2つの場所間の最短ルート、最短ルートに近いのに日照量が少ない方のルートを表示してくれます。",
-    "InfoPage.text2": "ヒカゲ・ファインダー は、東京大学がジョーリパブリックと共同で開発したサービスです。\n\n"
+    "ImfoPage.appbar_title": "情報",
+    "InfoPage.title": "Hikage Finder とは?",
+    "InfoPage.text": "Hikage Finder では、2つの地点間のルートについて、"
+        "他の地図サービスでも検索されるような最速のルートより、日照量が少ない方のルートを表示してくれます。",
+    "InfoPage.text2": "Hikage Finder は、東京大学がGeorepublicと共同で開発したサービスです。\n\n"
         "ご質問やご意見がございましたら、お気軽にお問い合わせください。",
     "InfoPage.contact": "  hikagefinder-ask@urbansciences.jp",
 
@@ -22,8 +22,8 @@ class StringParams {
     /// MapStartPage
     ///
     "MapStartPage.title": "出発地を選択してください",
-    "MapStartPage.message": "地図を移動して、ルートを開始したい場所にピンをドロップします。",
-    "MapStartPage.set": "選を問う",
+    "MapStartPage.message": "地図を移動して、ルートを開始したい場所にピンを配置します。",
+    "MapStartPage.set": "選択",
     "MapStartPage.cancel": "キャンセル",
 
     ///
@@ -52,7 +52,7 @@ class StringParams {
     "RouteResultPage.useRecommended": "おすすめのルートを使う",
     "RouteResultPage.fastest": "最速のルート",
     "RouteResultPage.useFastest": "最速のルートを使う",
-    "RouteResultPage.departure": "出て行け",
+    "RouteResultPage.departure": "出発",
     "RouteResultPage.findRoute": "ルートを検索する",
     "RouteResultPage.errorDlgTitle": "エラー...",
     "RouteResultPage.errorDlgMsg": "旅程は見つかりませんでした。設定を変更して再度お試しください。",
