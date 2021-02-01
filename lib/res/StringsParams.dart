@@ -22,7 +22,7 @@ class StringParams {
     /// MapStartPage
     ///
     "MapStartPage.title": "出発地を選択してください",
-    "MapStartPage.message": "地図を移動して、ルートを開始したい場所にピンを配置します。",
+    "MapStartPage.message": "地図を移動して、出発地にピンを配置します。",
     "MapStartPage.set": "選択",
     "MapStartPage.cancel": "キャンセル",
 
@@ -30,7 +30,7 @@ class StringParams {
     /// MapStopPage
     ///
     "MapStopPage.title": "目的地を選択してください",
-    "MapStopPage.message": "地図を移動して、到着したい場所にピンを配置します。",
+    "MapStopPage.message": "地図を移動して、目的地にピンを配置します。",
     "MapStopPage.set": "ルート検索",
     "MapStopPage.cancel": "キャンセル",
     "MapStopPage.findRoute": "現在のルートを探す...",
