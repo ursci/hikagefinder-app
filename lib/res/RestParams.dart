@@ -1,3 +1,3 @@
 class RestParams {
-  static final String baseUrl = "http://grp02.georepublic.net:8000/find_route";
+  static final String baseUrl = "https://hikagefinder.georepublic.net/find_route";
 }
