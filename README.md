@@ -44,8 +44,18 @@ storeFile=/path/to/key.jks
 
 ## Build for iOS
 
-[TBD]
+```
+flutter clean
+flutter channel stable
+flutter pub get
+flutter build ios
+```
 
+After above:
+1. Open `ios/Runner.xcworkspace` by Xcode >= 12.x
+2. Select [Product] / [Archive] menu
+3. Click [Validate App] button
+4. Click [Distribute App] button
 
 ## License
 
