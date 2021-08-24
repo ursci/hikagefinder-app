@@ -25,7 +25,7 @@ jobs:
       - name: Install pub Dependencies
         run: flutter pub get
       - name: Build Android App
-        run: flutter build apk --release
+        run: flutter build apk --release --no-sound-null-safety
       - name: Build iOS App
         run: |
           flutter build ios --no-codesign
