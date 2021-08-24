@@ -21,9 +21,9 @@ jobs:
         with:
           channel: 'stable'
       - name: Install pub Dependencies
-        run: flutter pub get
-      - name: Upgrade pub Dependencies
-          run: flutter pub upgrade
+        run: |
+          flutter pub get
+          flutter pub upgrade
       - name: Build Android App
         run: flutter build apk --release --no-sound-null-safety
       - name: Build iOS App
