@@ -1,18 +1,18 @@
 import 'dart:convert';
 
-import 'package:geojson/geojson.dart';
+import 'package:geojson_vi/geojson_vi.dart';
 import 'package:hikageapp/network/NetworkResult.dart';
 import 'package:hikageapp/network/RestUtil.dart';
 import 'package:hikageapp/res/RestParams.dart';
 import 'package:latlong/latlong.dart';
 
 class RouteUtils {
-  GeoJson _recommendedGeoJson = GeoJson();
-  GeoJson _shortestGeoJson = GeoJson();
+  GeoJSONFeature _recommendedGeoJson;
+  GeoJSONFeature _shortestGeoJson;
   int _errorCode = 1; // 1=Normal Error, 2=Service Time, 3=Service Area
 
-  GeoJson get recommendedGeoJson => _recommendedGeoJson;
-  GeoJson get shortestGeoJson => _shortestGeoJson;
+  GeoJSONFeature get recommendedGeoJson => _recommendedGeoJson;
+  GeoJSONFeature get shortestGeoJson => _shortestGeoJson;
   int get errorCode => _errorCode;
 
   Future<bool> findRoute(LatLng startPos, LatLng stopPos,
@@ -48,19 +48,23 @@ class RouteUtils {
     Map<String, dynamic> result = retVal.responseBody;
 
     if (retVal != null && retVal.response == "OK") {
-      GeoJson sGeoJson = GeoJson();
-      GeoJson rGeoJson = GeoJson();
+      GeoJSON sGeoJson = GeoJSON.fromMap(result["shortest"]);
+      GeoJSON rGeoJson = GeoJSON.fromMap(result["recommended"]);
 
-      await sGeoJson.parse(jsonEncoder.convert(result["shortest"]));
-      await rGeoJson.parse(jsonEncoder.convert(result["recommended"]));
-
-      if (sGeoJson.features.length == 0 && rGeoJson.features.length == 0) {
+      if (sGeoJson == null && rGeoJson == null) {
         /// No Features
         return false;
       }
 
-      _shortestGeoJson = sGeoJson;
-      _recommendedGeoJson = rGeoJson;
+      if (rGeoJson is GeoJSONFeatureCollection) {
+        List<GeoJSONFeature> features = rGeoJson.features;
+        _recommendedGeoJson = features.first;
+      }
+
+      if (sGeoJson is GeoJSONFeatureCollection) {
+        List<GeoJSONFeature> features = sGeoJson.features;
+        _shortestGeoJson = features.first;
+      }
 
       return true;
     }

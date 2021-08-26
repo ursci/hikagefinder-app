@@ -16,8 +16,8 @@ class MapStartPage extends StatefulWidget {
 
 class MapStartPageState extends State<MapStartPage> {
   MapController _mapController = MapController();
-  List<Marker> _markers = List<Marker>();
-  List<Polyline> _polyLines = List<Polyline>();
+  List<Marker> _markers = [];
+  List<Polyline> _polyLines = [];
 
   LatLng _initialPoint = LatLng(35.6592979, 139.7005656);
   LatLng _presentPoint;

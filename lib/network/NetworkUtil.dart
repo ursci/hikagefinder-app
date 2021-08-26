@@ -1,6 +1,5 @@
 import "dart:async";
 import "dart:convert";
-import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import "package:http/http.dart" as http;
@@ -18,7 +17,9 @@ class NetworkUtil {
   Future<dynamic> get(String url, {Map<String, dynamic> headers}) {
     debugPrint("Get URL: $url, Header: ${headers.toString()}");
 
-    return http.get(url, headers: headers).then(
+    Uri uri = Uri.parse(url);
+
+    return http.get(uri, headers: headers).then(
       (http.Response response) {
         final String res = response.body;
         final int statusCode = response.statusCode;
@@ -47,7 +48,9 @@ class NetworkUtil {
   }
 
   Future<dynamic> delete(String url, {Map<String, dynamic> headers}) {
-    return http.delete(url, headers: headers).then((http.Response response) {
+    Uri uri = Uri.parse(url);
+
+    return http.delete(uri, headers: headers).then((http.Response response) {
       debugPrint("Delete URL: $url, Response: ${response.body}");
 
       final String res = response.body;
@@ -78,8 +81,10 @@ class NetworkUtil {
     debugPrint("Patch URL: $url, Header: ${headers.toString()}, "
         "body : ${body.toString()}");
 
+    Uri uri = Uri.parse(url);
+
     return http
-        .patch(url, body: body.toString(), headers: headers, encoding: encoding)
+        .patch(uri, body: body.toString(), headers: headers, encoding: encoding)
         .then((http.Response response) {
       debugPrint("Patch URL: $url, Response: ${response.body}");
 
@@ -108,8 +113,10 @@ class NetworkUtil {
 
   Future<dynamic> post(String url,
       {Map<String, dynamic> headers, body, encoding}) {
+    Uri uri = Uri.parse(url);
+
     return http
-        .post(url, body: body, headers: headers, encoding: encoding)
+        .post(uri, body: body, headers: headers, encoding: encoding)
         .then((http.Response response) {
       final String res = response.body;
       final int statusCode = response.statusCode;
@@ -135,6 +142,7 @@ class NetworkUtil {
   }
 
   Future<bool> isInternetConnected() async {
+    /*
     bool retVal = false;
 
     try {
@@ -149,5 +157,7 @@ class NetworkUtil {
     }
 
     return retVal;
+     */
+    return true;
   }
 }

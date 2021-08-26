@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:geojson/geojson.dart';
+import 'package:geojson_vi/geojson_vi.dart';
 import 'package:hikageapp/pages/SelectedRoutePage.dart';
 import 'package:hikageapp/res/ColorParams.dart';
 import 'package:hikageapp/res/StringsParams.dart';
@@ -14,8 +14,8 @@ import 'package:location/location.dart';
 class RouteResultPage extends StatefulWidget {
   final LatLng startPos;
   final LatLng stopPos;
-  final GeoJson shortest;
-  final GeoJson recommended;
+  final GeoJSONFeature shortest;
+  final GeoJSONFeature recommended;
 
   RouteResultPage(this.startPos, this.stopPos, this.shortest, this.recommended);
 
@@ -25,11 +25,11 @@ class RouteResultPage extends StatefulWidget {
 
 class RouteResultPageState extends State<RouteResultPage> {
   MapController _mapController = MapController();
-  List<Marker> _markers = List<Marker>();
-  List<Polyline> _polyLines = List<Polyline>();
+  List<Marker> _markers = [];
+  List<Polyline> _polyLines = [];
 
-  GeoJson _recommendedGeoJson;
-  GeoJson _shortestGeoJson;
+  GeoJSONFeature _recommendedGeoJson;
+  GeoJSONFeature _shortestGeoJson;
   double _recoSunLight;
   double _shortSunLight;
   int _recoTime;
@@ -118,52 +118,63 @@ class RouteResultPageState extends State<RouteResultPage> {
   }
 
   drawRoute(bool shortestFirst) {
+    if (_recommendedGeoJson is GeoJSONFeature) {}
     _recoSunLight =
-        (_recommendedGeoJson.features[0].properties["sunlight_rate"] * 100)
-            .roundToDouble();
+        (_recommendedGeoJson.properties["sunlight_rate"] * 100).roundToDouble();
     _shortSunLight =
-        (_shortestGeoJson.features[0].properties["sunlight_rate"] * 100)
-            .roundToDouble();
-    _recoTime =
-        (_recommendedGeoJson.features[0].properties["total_minutes"]).round();
-    _shortTime =
-        (_shortestGeoJson.features[0].properties["total_minutes"]).round();
-    _recoDist =
-        (_recommendedGeoJson.features[0].properties["total_distance"]).round();
-    _shortDist =
-        (_shortestGeoJson.features[0].properties["total_distance"]).round();
+        (_shortestGeoJson.properties["sunlight_rate"] * 100).roundToDouble();
+    _recoTime = (_recommendedGeoJson.properties["total_minutes"]).round();
+    _shortTime = (_shortestGeoJson.properties["total_minutes"]).round();
+    _recoDist = (_recommendedGeoJson.properties["total_distance"]).round();
+    _shortDist = (_shortestGeoJson.properties["total_distance"]).round();
 
     _polyLines.clear();
+
+    GeoJSONGeometry rGeom = _recommendedGeoJson.geometry;
+    GeoJSONGeometry sGeom = _shortestGeoJson.geometry;
+
+    List<LatLng> rPts = [];
+    List<LatLng> sPts = [];
+
+    if (rGeom is GeoJSONLineString) {
+      for (List<double> coord in rGeom.coordinates) {
+        LatLng latLng = LatLng(coord[1], coord[0]);
+        rPts.add(latLng);
+      }
+    }
+
+    if (sGeom is GeoJSONLineString) {
+      for (List<double> coord in sGeom.coordinates) {
+        LatLng latLng = LatLng(coord[1], coord[0]);
+        sPts.add(latLng);
+      }
+    }
 
     if (shortestFirst) {
       _polyLines.add(Polyline(
         color: ColorParams.recommendedColor,
-        points: _recommendedGeoJson.lines[0].geoSerie
-            .toLatLng(), //[widget.startPos, widget.stopPos],
+        points: rPts, //[widget.startPos, widget.stopPos],
         strokeWidth: 6.0,
         isDotted: false,
       ));
 
       _polyLines.add(Polyline(
         color: ColorParams.fastestColor,
-        points: _shortestGeoJson.lines[0].geoSerie
-            .toLatLng(), //[widget.startPos, widget.stopPos],
+        points: sPts, //[widget.startPos, widget.stopPos],
         strokeWidth: 6.0,
         isDotted: false,
       ));
     } else {
       _polyLines.add(Polyline(
         color: ColorParams.fastestColor,
-        points: _shortestGeoJson.lines[0].geoSerie
-            .toLatLng(), //[widget.startPos, widget.stopPos],
+        points: sPts, //[widget.startPos, widget.stopPos],
         strokeWidth: 6.0,
         isDotted: false,
       ));
 
       _polyLines.add(Polyline(
         color: ColorParams.recommendedColor,
-        points: _recommendedGeoJson.lines[0].geoSerie
-            .toLatLng(), //[widget.startPos, widget.stopPos],
+        points: rPts, //[widget.startPos, widget.stopPos],
         strokeWidth: 6.0,
         isDotted: false,
       ));
@@ -226,8 +237,8 @@ class RouteResultPageState extends State<RouteResultPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Polyline> fastestRoute = List<Polyline>();
-    List<Polyline> recommendedRoute = List<Polyline>();
+    List<Polyline> fastestRoute = [];
+    List<Polyline> recommendedRoute = [];
 
     fastestRoute.add(_polyLines[0]);
     recommendedRoute.add(_polyLines[1]);

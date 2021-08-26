@@ -26,8 +26,8 @@ class SelectedRoutePageState extends State<SelectedRoutePage> {
 
   StreamSubscription<LocationData> _streamSubscription;
 
-  List<Marker> _markers = List<Marker>();
-  List<Polyline> _polyLines = List<Polyline>();
+  List<Marker> _markers = [];
+  List<Polyline> _polyLines = [];
   String _routeText;
   LatLng _initialPoint;
 
